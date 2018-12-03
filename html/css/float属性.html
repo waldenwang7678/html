@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style type="text/css">
+
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        /*多个块级元素同时使用 float 元素 , 在同一行显示*/
+        #asd {
+            float: left;
+            width: 80px;
+            height: 60px;
+            background: #ceffc2;
+        }
+
+        #asd1 {
+            float: left;
+            width: 120px;
+            height: 90px;
+            background: #FFAA00;
+        }
+
+        #asd2 {
+            float: left;
+            width: 100px;
+            height: 60px;
+            background: #d9e0ee;
+        }
+
+        /*将行内元素转换成行内块元素 , 使用转换时建议用display,
+        */
+        #block > strong {
+            float: left;
+            width: 100px;
+            height: 100px;
+            background: violet;
+        }
+
+        /*图文环绕*/
+        #img_layout > img {
+            float: left;
+            width: 100px;
+            height: 100px;
+        }
+
+        /*导航栏*/
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            overflow: hidden;
+            background-color: #272822;
+        }
+
+        li {
+            list-style: none;
+            float: left;
+            width: auto;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        i a:hover {
+            background-color: yellowgreen;
+            color: red;
+        }
+
+        /*网页布局*/
+        .all {
+            width: 490px;
+            height: 350px;
+            background-color: #458B00;
+            margin: 0 auto;
+        }
+
+        .header {
+            height: 25px;
+            background-color: pink;
+        }
+
+        .content {
+            height: 300px;
+            background-color: #46F3B6;
+        }
+
+        .left-content {
+            width: 50px;
+            height: 300px;
+            background-color: #20B2AA;
+            float: left;
+        }
+
+        .right-content {
+            width: 50px;
+            height: 300px;
+            background-color: blue;
+            float: left;
+        }
+
+        .middle-content {
+            width: 390px;
+            height: 300px;
+            background-color: #CBE923;
+            float: left;
+        }
+
+        .top-content {
+            height: 150px;
+            background-color: #55cd0e;
+        }
+
+        .bottom-content {
+            height: 150px;
+            background-color: #a4cd0e;
+        }
+
+        /*浮动1*/
+        #all_still {
+            width: 500px;
+            height: auto;
+            background-color: yellow;
+        }
+
+        #left_still {
+            width: 250px;
+            height: 200px;
+            background: pink;
+            float: left;
+        }
+
+        #right_still {
+            width: 250px;
+            height: 200px;
+            background: blue;
+            float: left;
+        }
+
+        #bottom_still {
+            width: 500px;
+            height: 120px;
+            background: #00ff00;
+        }
+
+        /*清除浮动
+                * 清除当前元素以上的所有浮动
+               */
+        #clearfix {
+            clear: both;
+        }
+
+        /*浮动2*/
+        #all_solid {
+            overflow: hidden;
+            width: 500px;
+            height: auto;
+            background-color: yellow;
+        }
+
+        #left_solid {
+            width: 250px;
+            height: 200px;
+            background: pink;
+            float: left;
+        }
+
+        #right_solid {
+            width: 250px;
+            height: 200px;
+            background: blue;
+            float: left;
+        }
+
+        #bottom_solid {
+            width: 500px;
+            height: 120px;
+            background: #00ff00;
+        }
+
+        /*浮动3*/
+        #all_three {
+            width: 500px;
+            height: auto;
+            background-color: yellow;
+        }
+
+        #left_three {
+            width: 250px;
+            height: 200px;
+            background: pink;
+            float: left;
+        }
+
+        #right_three {
+            width: 250px;
+            height: 200px;
+            background: blue;
+            float: left;
+        }
+
+        #bottom_three {
+            width: 500px;
+            height: 120px;
+            background: #00ff00;
+        }
+
+        /*只能清除当前标签之前的 float属性*/
+        .clearf:after {
+            content: "";
+            display: block;
+            clear: both;
+            height: 0;
+            line-height: 0;
+            visibility: hidden;
+        }
+
+        .clearf {
+            zoom: 1;
+        }
+
+    </style>
+
+
+</head>
+<body>
+<p>
+    1 ,使用了float的元素会脱离标准流不再占原来的位置<br>
+    2 ,几个块级元素(比如div)同时使用float时它们将在同一行显示<br>
+    3 ,float可将行内元素转化为行内块元素<br>
+</p>
+
+<div id="asd">今天你好吗</div>
+<div id="asd1">李改</div>
+<div id="asd2">郭靖</div>
+
+<div id="block">
+
+    <strong>
+        忽如一夜春风来
+    </strong>
+</div>
+
+
+<p>float 的使用场景</p>
+
+<h4> 1 : 图文环绕</h4>
+<h4> 2 : 导航栏</h4>
+<h4> 3 : 网页布局</h4>
+
+
+<!--图文环绕-->
+<div id="img_layout">
+    <img src="../../img/aaa.jpeg"/>
+    <p>小鹿 : 知北游于玄水之上，登隐弅之丘，而适遭无为谓焉。知谓无为谓曰：“予欲有问乎若：何思何虑则知道？
+        何处何服则安道？何从何道则得道？”三问而无为谓不答也。非不答，不知答也。知不得问，反于白水之南，登狐阕之上，
+        而睹狂屈焉。知以之言也问乎狂屈。狂屈曰：“唉！予知之，将语若。”中欲言而忘其所欲言。知不得问，反于帝宫，见黄帝而问焉。
+        黄帝曰：“无思无虑始知道，无处无服始安道，无从无道始得道。”知问黄帝曰：“我与若知之，彼与彼不知也，其孰是邪？”
+        黄帝曰：“彼无为谓真是也，狂屈似之，我与汝终不近也。夫知者不言，言者不知，故圣人行不言之教。道不可致，德不可至。
+        仁可为也，义可亏也，礼相伪也。故曰：‘失道而后德，失德而后仁，失仁而后义，失义而后礼。’礼者，道之华而乱之首也。
+        故曰：‘为道者日损，损之又损之，以至于无为。无为而无不为也。’今已为物也，欲复归根，不亦难乎！其易也其唯大人乎！
+        生也死之徒，死也生之始，孰知其纪！人之生，气之聚也。聚则为生，散则为死。若死生为徒，吾又何患！故万物一也。
+        是其所美者为神奇，其所恶者为臭腐。臭腐复化为神奇，神奇复化为臭腐。故曰：‘通天下一气耳。’圣人故贵一。
+        ”知谓黄帝曰：“吾问无为谓，无为谓不应我，非不我应，不知应我也；吾问狂屈，狂屈中欲告我而不我告，非不我告，中欲告而忘之也；
+        今予问乎若，若知之，奚故不近？”黄帝曰：“彼其真是也，以其不知也；此其似之也，以其忘之也；予与若终不近也，以其知之也。
+        ”狂屈闻之，以黄帝为知言。
+    </p>
+
+</div>
+
+<!--制作导航栏-->
+<ul>
+    <li><a href="http://www.baidu.com">百度</a></li>
+    <li><a href="http://www.sina.com">新浪</a></li>
+    <li><a href="http://www.qq.com">腾讯</a></li>
+    <li><a href="http://www.jingdong.com">京东</a></li>
+</ul>
+
+<!--网页布局-->
+<br>
+<div class="all">
+    <div class="header"></div>
+    <div class="content">
+        <div class="left-content"></div>
+        <div class="middle-content">
+            <div class="top-content"></div>
+            <div class="bottom-content"></div>
+        </div>
+        <div class="right-content"></div>
+    </div>
+</div>
+
+
+<!--清除浮动1 , 使用一个标签清除之前的浮动影响-->
+<div id="all_still">
+    <div id="left_still"></div>
+    <div id="right_still"></div>
+    <div id="clearfix"></div>
+</div>
+<div id="bottom_still"></div>
+
+<div style="background: #FFAA00;width: auto;height: 30px"></div>
+
+<!--清除浮动2 , 设置父控件的 overfloat属性为 hidden , -->
+<div id="all_solid">
+    <div id="left_solid"></div>
+    <div id="right_solid"></div>
+</div>
+<div id="bottom_solid"></div>
+
+<div style="background: #FFAA00;width: auto;height: 30px"></div>
+
+<!--清除浮动 , 一个标签可以添加多个class , 只能添加一个 id , 此方式只能清除当前标签之前的 float属性-->
+<div class="all_three clearf">
+    <div id="left_three"></div>
+    <div id="right_three"></div>
+</div>
+<div id="bottom_three"></div>
+
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<img id='aaa' src="../../img/aaa.jpeg"/>
+<img id='aaa1' src="../../img/aaa.jpeg"/>
+
+
+</body>
+
+<script>
+
+    var img = document.getElementsByTagName('img');
+    var list = '';
+    for (var i = 0; i < img.length; i++) {
+        if (i === 0) {
+            list = img[i].src;
+        } else {
+            list = list + '@-@' + img[i].src;
+        }
+        img[i].onclick = function () {
+            // NativeJavaScriptInterface.showImage(list, this.src);
+            alert(list);
+        }
+    }
+
+
+</script>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h3>电池电量:</h3>
+<meter value="6" max="10" min="0"></meter>
+<br><br>
+<h3>进度</h3>
+<progress max="100" value="20"></progress>
+
+<br>
+<h3>用 audo 播放音乐 :</h3>
+<audio src="../../res/baihu.mp3" controls="controls">
+    当您看到这行文字时，意味着您的设备不支持audio标签
+</audio>
+
+
+<h3>用 video 播放视频</h3>
+<video style="background: antiquewhite" width="200px" height="200px" src="../../res/linyu.mkv" controls="controls">
+    当您看到这行文字时，意味着您的设备不支持video标签
+</video>
+
+<h2>网络监听</h2><br>
+
+
+<h2>定位</h2>
+<button type="button" onclick="getlocation()">getLocation</button>
+
+
+</body>
+
+
+<script>
+
+    window.addEventListener('online', function (ev) {
+        alert('网络连接已建立');
+    });
+
+    window.addEventListener('offline', function (ev) {
+        alert('网络连接断开');
+    });
+
+    function getlocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+        } else {
+            alert('您的浏览器不支持地理定位');
+        }
+    }
+
+    // 获取地理位置成功的回调函数
+    function successCallback(position) {
+        var longitude = position.coords.longitude;
+        var latitude = position.coords.latitude;
+        alert('经度=' + longitude + '，纬度=' + latitude);
+    }
+
+    // 获取地理位置失败的回调函数
+    function errorCallback(error) {
+        alert('获取用户位置失败');
+    }
+
+</script>
+
+
+</html>

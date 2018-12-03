@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<embed id="image"
+       src="http://poc.megalinkware.com:8888/html/image/GSC147769.svg"/>
+
+<!--<div style="display:block;width:330px;height:240px;background: url(./test.svg) no-repeat;background-size: 100%;" ></div>-->
+
+<!--<div id="div_svg" style="width:800px;height:600px;background:-->
+        <!--url(http://poc.megalinkware.com:8888/html/image/GSC147769.svg);-->
+        <!--background-size: 100%;"></div>-->
+
+
+<button onclick="addDiv()"> 添加</button>
+<button onclick="minDiv()"> 移除</button>
+</body>
+
+<script type="text/javascript">
+    function addDiv() {
+        // var body = document.getElementsByTagName('body')[0];
+        //body.innerHTML = body.innerHTML.replace(/<img([^<>]*)>/gi, '<embed$1>');
+
+        var svgImage = document.getElementById('image');
+        var parent = svgImage.parentNode;
+
+
+        var floatDiv = document.createElement('div');
+
+        var width = svgImage.width;
+        var height = svgImage.height;
+
+        //alert(clone.tagName);
+        // floatDiv.style.cssText = "width:800px;height:600px;background:pink;";
+        // floatDiv.style.cssText = 'width:' + width + ';height:' + height + ';background:pink;';
+
+        // floatDiv.style.cssText="background:pink";
+        // floatDiv.style.width='800px';
+        floatDiv.style.width = width;
+        floatDiv.style.height = '600px';
+        floatDiv.style.background = 'pink';
+
+
+        parent.appendChild(floatDiv);
+        var clone = svgImage.cloneNode(true);
+        clone.style.parent.appendChild(clone);
+        floatDiv.onclick = function () {
+            alert('div')
+        };
+        clone.onclick = function () {
+            alert('div')
+        };
+    }
+
+    function minDiv() {
+        var svgImage = document.getElementById('image');
+        var a = [];
+        var p = svgImage.parentElement.children;
+        // alert(svgImage.parentElement.tagName);
+        for (var i = 0; i < p.length; i++) {
+            alert(p[i].tagName);
+            svgImage.parentElement.removeChild(p[i]);
+        }
+    }
+
+    function viewClick() {
+        alert("click_view")
+    }
+
+    document.getElementById('div_svg').onclick = viewClick;
+</script>
+</html>

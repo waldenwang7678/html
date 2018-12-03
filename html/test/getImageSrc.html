@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<img src="http://poc.megalinkware.com:8888/html/image/GSC147769.svg"/>
+</body>
+
+<script>
+
+    var names = document.getElementsByTagName("img");
+    for (var i = 0; i < names.length; i++) {
+        var urlStr = names[i].src;
+        android.getUrl(urlStr);
+    }
+
+
+</script>
+</html>

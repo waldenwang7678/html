@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .booth {
+            width: 400px;
+            border: 10px solid #ddd;
+            margin: 0 auto;
+        }
+
+        #video {
+            background: #ceffc2;
+        }
+
+        #canvas {
+            background: #458B00;
+        }
+    </style>
+</head>
+<body>
+
+<div class="booth">
+    <video id="video" width="400" height="300"></video>
+    <button id='tack'> snap shot</button>
+    <canvas id='canvas' width="400" height="300"></canvas>
+    <img id='img' src='../../img/aaa.jpeg'>
+
+    <button onclick="int=window.clearInterval(int)">停止</button>
+
+</div>
+
+
+<script>
+    var video = document.getElementById('video'),
+        snap = document.getElementById('tack'),
+        canvas = document.getElementById('canvas'),
+        img = document.getElementById('img'),
+        vendorUrl = window.URL || window.webkitURL;
+
+    //媒体对象
+    navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+
+    // 有些浏览器只是不实现它-返回一个不被拒绝的承诺与一个错误保持一致的接口
+    if (!navigator.getMedia) {
+        Promise.reject(new Error('getUserMedia is not implemented in this browser-getUserMedia是不是在这个浏览器实现'));
+    }
+
+    // 旧的浏览器可能无法实现mediadevices可言，所以我们设置一个空的对象第一
+    if (navigator.mediaDevices === undefined) {
+        navigator.mediaDevices = {};
+    }
+
+    // 一些浏览器部分实现mediadevices。我们不能只指定一个对象
+    // 随着它将覆盖现有的性能getUserMedia
+    // 在这里，我们就要错过添加getUserMedia财产
+    if (navigator.mediaDevices.getUserMedia === undefined) {
+        navigator.mediaDevices.getUserMedia = promisifiedOldGUM;
+    }
+
+    var promisifiedOldGUM = function (constraints) {
+
+        // 第一个拿到getUserMedia，如果存在
+        var getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia);
+
+        // 有些浏览器只是不实现它-返回一个不被拒绝的承诺与一个错误保持一致的接口
+        if (!getUserMedia) {
+            return Promise.reject(new Error('getUserMedia is not implemented in this browser-getUserMedia是不是在这个浏览器实现'));
+        }
+
+        // 否则，调用包在一个旧navigator.getusermedia承诺
+        return new Promise(function (resolve, reject) {
+            getUserMedia.call(navigator, constraints, resolve, reject);
+        });
+    };
+
+    navigator.getMedia({
+        video: true, //使用摄像头对象
+        audio: true
+    }, function (strem) {
+        // 获取流
+        video.src = vendorUrl.createObjectURL(strem);
+        video.onloadedmetadata = function (e) {
+            video.play();
+        };
+
+    }, function (error) {
+        console.log(error);
+    });
+
+
+    snap.addEventListener('click', function () {
+        canvas.getContext('2d').drawImage(video, 0, 0, 400, 300);
+        img.src = canvas.toDataURL("image/png");
+    });
+
+    var int=self.setInterval("clock()",1000);
+
+
+</script>
+</body>
+</html>

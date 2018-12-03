@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../js/基本语法.js">
+
+
+    </script>
+    <style type="text/css">
+        .js_function > button {
+            display: block;
+        }
+
+        .js_function {
+            margin: 5px;
+            float: left;
+            background: #ceffc2;
+            padding: 10px;
+        }
+
+        .js_variate {
+            float: left;
+            height: auto;
+            background: #eeeeee;
+            padding: 10px;
+        }
+
+        .js_variate_rule {
+            float: left;
+        }
+
+        .js_variate > ul {
+            margin: 10px;
+            width: 400px;
+            background: #ffffff;
+        }
+
+        .js_data_type {
+            margin: 5px;
+            background: #eeeeee;
+            padding: 5px;
+            width: 300px;
+            height: auto;
+            float: left;
+        }
+
+        .clearfloat {
+            clear: left;
+        }
+
+        .js_variate_attr {
+            float: left;
+            margin-left: 20px;
+            position: relative;
+        }
+
+        .js_array {
+            margin: 5px;
+            padding: 5px;
+            background: #eeeeff;
+            float: left;
+            width: 400px;
+            height: auto;
+        }
+
+        .js_operate {
+            padding: 5px;
+            margin: 5px;
+            float: left;
+            background: #d9e0ee;
+            width: 300px;
+            height: auto;
+        }
+
+        .js_flow {
+            margin: 5px;
+            padding: 5px;
+            float: left;
+            background: #ceffc2;
+            width: auto;
+            height: auto;
+        }
+
+        .js_object {
+            padding: 5px;
+            margin: 5px;
+            float: left;
+            background: lavender;
+        }
+
+        .js_funciton_attr {
+            margin: 5px;
+            padding: 5px;
+            background: #d9e0ee;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div class="js_function">
+    <button id="alert" type="button" onclick="alert_asd()">alert</button>
+    <button id="confirm" type="button" onclick="confirm_asd()">confirm</button>
+    <button id="prompt" type="button" onclick="prompt_asd()">prompt</button>
+    <button id="console" type="button" onclick="console_asd()">console</button>
+    <button id="write" type="button" onclick="write_asd()"> document.write</button>
+</div>
+
+
+<div class="js_variate ">
+    <div class="js_variate_rule">
+        <h3>js 变量基本规则</h3>
+        <ul>
+            <li>变量名中不能含有空格</li>
+            <li>请注意JavaScript严格区分字母大小写，所以var A 和var a 是不同的变量</li>
+            <li>请勿使用纯数字或者以数字开头定义变量</li>
+            <li>不建议使用汉字定义变量</li>
+            <li>请勿使用纯特殊字符定义变量</li>
+            <li>请勿使用特殊字符开头(“_”除外)定义变量</li>
+            <li>请勿使用关键字定义变量；比如var、try、void 等</li>
+            <li>不建议使用保留字定义变量；比如byte、char、import等</li>
+        </ul>
+    </div>
+    <div class="js_variate_attr">
+        <h3>变量提升 : 变量的声明总会被解释器提升到函数体的顶部, 局部变量会覆盖全局变量</h3>
+        <button type="button" onclick="get_name()">变量提升</button>
+        <button type="button" onclick="get_name_ori()">变量提升1</button>
+        <p>var 声明的变量没有块作用域</p>
+        <p>let 弥补 var的缺陷, 将变量限制在代码块中</p>
+        <P>const声明的变量为常量, 不可修改</P>
+    </div>
+</div>
+
+<div class="js_data_type clearfloat">
+    <div>
+        <h3>js 数据类型</h3>
+        <ul>
+            <li>number 数值类型</li>
+            <li>string 字符串类型</li>
+            <li>boolean 布尔类型</li>
+            <li>undefined 变量未初始化</li>
+            <li>null 值为空</li>
+
+        </ul>
+    </div>
+    <div>
+        <h3>类型转换</h3>
+        <p>
+            <b>3.14 :</b>
+            <button type="button" onclick="setValue1(3.14 ,document.getElementById('value1'))">num->str</button>
+            <b id='value1'>null</b>
+
+        </p>
+        <p>
+            <b>"3.14" :</b>
+            <button type="button" onclick="setValue2_1('3.14' ,document.getElementById('value2'))">str->num</button>
+            <button type="button" onclick="setValue2_2('3.14' ,document.getElementById('value2'))">str->int</button>
+            <button type="button" onclick="setValue2_3('3.14' ,document.getElementById('value2'))">str->float</button>
+            <b id='value2'>null</b>
+
+        </p>
+        <p>
+            <b>"3.14" :</b>
+            <button type="button" onclick="setValue3(0 ,document.getElementById('value3'))">var->boolean</button>
+            <b id='value3'>null</b>
+
+        </p>
+    </div>
+</div>
+
+<div class="js_array">
+    <h3>js数组</h3>
+    <p>可以包含不同类型的元素 , 通过 index 访问</p>
+    <p>
+        js 数组合并/合并数组a,b : a.concat(b)
+        <button type="button"
+                onclick="parse_array_to_str(
+                    [1,'haha',true],['asd',false ,333],document.getElementById('array_concat_text1'))">
+            合并
+        </button>
+        <br>
+
+        js数组元素连接
+        <button
+                type="button"
+                onclick="array_joint(['首页','消息','资讯',false],document.getElementById('array_concat_text1'))">
+            连接
+        </button>
+        <br>
+        <b>数组元素操作 </b><br>
+        <b>添加:array.push() 添加到数组末尾</b><br>
+        <b>删除:array.pop() 移除数组末尾元素</b><br>
+
+        <b style="color: #FFAA00" id="array_concat_text1"></b>
+
+    </p>
+
+</div>
+
+<div class="js_operate">
+    <h3>js 运算符</h3>
+    <b> '==' 只判断元素内容是否相同,与数据类型无关</b><br>
+    <b> '==='判断类型和内容</b><br>
+    <b> '!=='类型和内容都不相同才会返回 true</b><br>
+    <b>三元运算(同java)</b><br>
+    <b>typeof 返回数据类型 , 可以当运算符,也可以当函数</b>
+    <b>instanceof 类型判断</b>
+
+</div>
+
+<div class="js_flow">
+    <b> 流程控制 : 略</b><br>
+    <b> js函数 :</b><br>
+    <b>常规函数</b><br>
+    <b>匿名函数</b><br>
+    <b> Function定义匿名函数 : </b><br>
+    <b>var a=new Function("a",alert(a)); <br>
+        a("hello");</b>
+
+</div>
+
+
+<div class="js_object clearfloat">
+    <h3> js对象 </h3>
+    <h3> (1) 通过new调用构造器创建对象</h3>
+    <button type="button" onclick="cearteObject1()">构造器创建</button>
+
+    <h3> (2) 使用Object创建对象</h3>
+    <button type="button" onclick="createObject2()">Object创建</button>
+
+    <h3> (3) 利用JSON创建对象</h3>
+    <button type="button" onclick="createObject3()">JSON 创建</button>
+
+</div>
+
+<div class="js_funciton_attr">
+    <h3>Function 属性</h3>
+    <ul>
+        <li>length : 函数/对象构造函数 参数个数</li>
+        <li>argument : 正在执行的函数内置属性</li>
+        <li>prototype : 函数原型对象,通过 prototype 定义对象的属性和方法,可提高效率</li>
+    </ul>
+    <h3>call():调用function对象并改变函数内this指针引用</h3>
+
+</div>
+
+
+</body>
+
+</html>

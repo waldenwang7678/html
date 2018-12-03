@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        div[id="aaa"] {
+            background: #FFAA00;
+            padding: 20px;
+            margin: 10px;
+            width: 100px;
+            height: 100px;
+            border: solid 2px red;
+            /*设置内容溢出的显示状态
+                visible 溢出部分可见
+                hidden 溢出部分隐藏
+                auto 溢出部分滚动
+                scroll 全部滚动
+            */
+            overflow: auto;
+            /*border-color: violet;*/
+            /*border-width: 3px;*/
+            /*border-style: double;*/
+        }
+
+        /*div[id="asd"]{}  与下面相同*/
+        div#asd {
+            /*居中显示*/
+            margin: 0 auto;
+            background: violet;
+        }
+
+        div > span {
+            background-color: #7FFF00;
+            font-size: 45px;
+            color: white;
+        }
+
+        img {
+            vertical-align: middle;
+        }
+        div#ddd{
+            background: #ceffc2;
+        }
+    </style>
+</head>
+<body>
+<div id="aaa">
+    <div id="asd">
+        <p>北冥有鱼</p>
+        <p>其名为鲲</p>
+        <p>其名为鲲</p>
+    </div>
+
+
+</div>
+<div id="ddd">
+
+    <img src="../../img/aaa.jpeg">
+    <span>小羊</span>
+    <span>小羊</span>
+</div>
+
+
+注意的问题:
+两个盒子垂直显示的时候，如果上方的盒子设置了margin-bottom: Mpx并且下方的盒子设置了 margin-top:Npx;<br>
+那么两者的实际间距并不是M+N而是M、N两者的最大值。
+<br><br>
+两个盒子嵌套显示的时候，若想通过给内部的盒子设置margin-top:Mpx;使其距离外部盒子顶部产生一定距离；<br>
+此时发现无效，需要给外部盒子设置overflow: hidden;方可解决该问题
+
+
+
+</body>
+</html>

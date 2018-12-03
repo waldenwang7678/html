@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--<input type="text" value="text"/>-->
+<!--<br>-->
+<!--<input type="password" value="password"/>-->
+<!--<br>-->
+<!--<input type="number" value="number"/>-->
+<!--<br>-->
+<!--<input type="email" value="email"/>-->
+<!--<br>-->
+<!--<input type="data" value="data"/>-->
+<!--<br>-->
+<!--<input type="time" value="time"/>-->
+<!--<br>-->
+<!--<input type="color" value="color"/>-->
+<!--<br>-->
+<!--<input type="radio" value="radio"/>-->
+
+<!--<br>-->
+<!--<input type="checkbox" value="checkbox"/>-->
+
+<!--<br>-->
+<!--<input type="file" value="file"/>-->
+
+<!--<br>-->
+<!--<input type="submit" value="submit"/>-->
+
+<!--<br>-->
+<!--<input type="reset" value="reset"/>-->
+
+<br><br>
+<form id="userform" action="http://www.walden-wang.cn" title="用户注册表单"
+      target="_self" enctype="multipart/form-data" method="post">
+    <fieldset>
+        <legend>用户注册信息</legend>
+        <br>
+        昵称:<input type="text" name="un" maxlength="12" value="walden"><br><br>
+        密码:<input type="password" name="pwd" maxlength="10"><br><br>
+        性别:<input type="radio" name="gender" value="man" checked="checked"> 男
+        <input type="radio" name="gender" value="women"> 女 <br><br>
+        头像:<input id="userphoto" type="file" name="profile"><br><br>
+        籍贯:
+        <select name="province">
+            <option>河北</option>
+            <option>河南</option>
+            <option>湖南</option>
+            <option selected="selected">湖北</option>
+            <option>广州</option>
+        </select><br><br>
+        爱好:<input type="checkbox" name="hobby"> 读书
+        <input type="checkbox" name="hobby"> 游泳
+        <input type="checkbox" name="hobby"> 画画
+        <input type="checkbox" name="hobby"> 骑马
+        <input type="checkbox" name="hobby"> 射箭
+        <br><br>
+        个人简介:
+        <br>
+        <textarea name="introduce" cols="40">输入个人简介</textarea>
+        <br><br>
+        个人网站:<input type="url" name="userurl"><br><br>
+        个人邮箱:<input type="email" name="useremail"><br><br>
+        体重:<input type="number" name="userweight"><br><br>
+        出生日期:<input type="date" name="userbirth"><br><br>
+        详细时间:<input type="time" name="usertime"><br><br>
+        性格颜色:<input type="color" value="#ceffc2" name="usercolor"><br><br>
+        <input type="submit" value="开始注册">
+        <input type="reset" name="重置信息">
+
+
+    </fieldset>
+</form>
+毕业院校:<input type="text" name="scroll" form="userform">
+
+
+<form action="url" method="post">
+    请输入你喜欢的城市: <input type="text" name="name" list="namelist">
+    <datalist id="namelist">
+        <option>北京</option>
+        <option>武汉</option>
+        <option>南京</option>
+        <option>重庆</option>
+    </datalist>
+
+</form>
+<br><br>
+
+
+<form>
+    用户名:<input type="text" name="name"><br><br>
+
+    密码:<input type="password" name="pwd"><br><br>
+
+    <input type="submit" name="login" value="登录" formaction="http://www.walden-wang.cn"
+           formmethod="post" formtarget="_self" formenctype="multipart/form-data"> <br><br>
+    <input type="submit" name="regest" value="注册" formaction="http://www.baidu.com"
+           formmethod="post" formtarget="_self" formenctype="multipart/form-data">
+
+</form>
+
+</body>
+</html>

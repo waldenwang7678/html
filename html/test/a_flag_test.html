@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style type="text/css">
+        a {
+            display: block;
+            margin-left: 200px;
+            width: 300px;
+            height: 50px;
+            background: #46F3B6;
+            margin-bottom: 30px;
+        }
+    </style>
+
+    <script>
+
+        function asd(object) {
+            alert(object.href)
+        }
+
+        function remove_href() {
+            var as = document.getElementsByTagName("a");
+            for (var i = 0; i < as.length; i++) {
+                (function (index) {
+                        var value1 = as[i].href;
+                        var value = as[i].innerText;
+                        as[i].href = 'javascript:void(0);';
+                        as[i].onclick = function (ev) {
+                            alert(value1);
+                        }
+                    }
+                )(i);
+            }
+        }
+
+        function getHref(obj) {
+            alert(obj.innerText);
+        }
+    </script>
+</head>
+<body>
+
+<a href="addImageClick.html" onclick="asd(this)">正常跳转</a>
+
+<a href="javascript:void(0);" onclick="asd(this)"> 空跳转</a>
+
+<a href="http://www.baidu.com" onclick="asd(this); return true; "> onclick return true </a>
+
+<a href="http://www.baidu.com" onclick="asd(this); return false; ">onclick return false</a>
+
+<a href="http://www.baidu.com" onclick="getHref(this)">点我</a>
+
+<button onclick="remove_href()"> remove_href</button>
+
+
+</body>
+</html>

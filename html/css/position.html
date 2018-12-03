@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style type="text/css">
+        .d1 {
+            background: pink;
+            width: 600px;
+            height: auto;
+            float: left;
+            position: relative;
+            border: 1px red solid;
+            left: 50px;
+            top: 10px;
+        }
+
+        .d2 {
+            float: left;
+            position: relative;
+            top: 80px;
+            left: 100px;
+        }
+
+        img {
+            position: fixed;
+            z-index: auto;
+        }
+
+        .clear:after {
+            /*content: "";*/
+            /*display: block;*/
+            /*clear: both;*/
+            /*height: 0;*/
+            /*line-height: 0;*/
+            /*visibility: hidden;*/
+        }
+
+        .clear {
+            /*zoom: 1;*/
+        }
+
+        .d3 {
+            background: #7FFF00;
+            width: 300px;
+            height: auto;
+            border: 2px blue solid;
+            position: absolute;
+            margin-top: 360px;
+            margin-left: 200px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="d1 clear">
+    <p> (1) static: 默认位置</p>
+    <p> (2) absolute:
+        <br>绝对位置 ,相对 static定位以外的第一个父元素定位
+        <br>元素脱流 , 类似浮动
+        <br>为单独元素设置 absolute 元素,会以浏览器左上角为基准
+        <br>元素嵌套时, 父控件 static / 非static, 子元素 absolute , 子元素以 body左上角/父控件为基准
+        <br>行内元素使用position:absolute 将变成行内块元素<br>
+        (3) relative :
+        <br>用于微调
+        <br>根据 left ,top, right ,botton值移动 ,
+        <br>不脱流
+        <br> 不能进行元素模式转化
+        <br> 子绝父相, 常见用法
+        (4) fixed 固定位置
+        <br>元素会固定定位 且 不占位置 并 脱离标准流
+        <br>行内元素转为行内块元素
+        <br>可通过z-index进行层次分级
+
+    </p>
+</div>
+
+<div class="d2">
+    <img src="../../img/cc.jpg">
+
+
+</div>
+<div class="d3 ">
+    <h2>规避脱标流</h2>
+    <ul class="standard">
+
+        <li>网页布局过程中尽量使用标准流布局</li>
+        <li>标准流不能解决的问题优先考虑使用浮动</li>
+        <li>浮动不能解决的问题再考虑使用定位</li>
+        <li>在子元素中使用margin-left:auto 将其置于父元素的最右边</li>
+        <li>在子元素中使用margin-right:auto将其置于父元素的最左边</li>
+        <li>在子元素中使用margin 0 auto;使其在父元素内水平居中显示</li>
+
+    </ul>
+
+
+</div>
+
+</body>
+</html>

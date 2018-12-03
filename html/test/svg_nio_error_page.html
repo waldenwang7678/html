@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #all {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        #svg_img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 0);
+            width: 400px;
+            height: 260px;
+        }
+
+        svg {
+            width: 400px;
+            height: 260px;
+        }
+
+        rect {
+            width: 400px;
+            height: 260px;
+            fill: #f2f2f0;
+            opacity: 0.5;
+        }
+
+        path {
+            fill: #cccccc;
+        }
+    </style>
+</head>
+<body>
+<div id="all">
+    <div id="svg_img">
+        <svg id='svg' version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <path d="M150 100 A50,50 0 0,1 250,100 L224 100 A24,24 0 0,0 176,100 L150 100 Z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+            </path>
+            <path d="
+                M156 122
+                L179 100
+                L221 100
+                L244 122
+                L228 142
+                L200 117
+                L172 142
+                L156 122
+                Z "
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+            </path>
+            <rect x="0" y="0" rx="20" ry="20"></rect>
+        </svg>
+    </div>
+</div>
+<script>
+    document.getElementById('svg_img').addEventListener('click', load());
+    function load() {
+        alert('asdasd');
+        jsObject.loadSvgAgain();
+    }
+</script>
+</body>
+</html>

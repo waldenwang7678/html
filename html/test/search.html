@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h4> today is sunshine</h4>
+
+
+<div>
+    <strong> I am your brother </strong><br>
+
+    <span> she is your sister </span>
+</div>
+
+<div>
+    <br>
+    <button id="change">aisd</button>
+</div>
+
+</body>
+
+<script>
+
+
+
+    var key = 'is';
+    var tags = document.getElementsByTagName('body');
+    var count = tags.length;
+    for (var i = 0; i < count; i++) {
+        change(tags[i]);
+    }
+
+    function change(elem) {
+        var content = elem.innerHTML;
+        var fen = content.split(key);
+        elem.innerHTML = fen.join('<span style="background:#cfc;">' + key + '</span>');
+    }
+</script>
+
+
+</html>

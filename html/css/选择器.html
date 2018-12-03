@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+
+        /*标签选择器*/
+        p {
+            background: white;
+            color: black;
+            width: 200px;
+            height: 40px;
+            font-size: 20px;
+        }
+
+        p[id="asd1"] {
+            background: aquamarine;
+            color: #FFAA00;
+            font-size: 18px;
+            width: 200px;
+            height: 40px;
+        }
+
+        p[id="asd2"] {
+            background: chartreuse;
+            color: #999;
+            font-size: 18px;
+            width: 200px;
+            height: 40px;
+        }
+
+        /* id选择器*/
+        #asd3 {
+            background: blue;
+            color: red;
+            width: 200px;
+            height: 40px;
+            font-size: 24px;
+        }
+
+        /*类选择器*/
+        .asd4 {
+            background: blueviolet;
+            color: royalblue;
+            width: 200px;
+            height: 40px;
+            font-size: 28px;
+        }
+
+        /*通配符选择器,设置页面统一样式 ,兼容不同浏览器*/
+        * {
+            background: lavender;
+            color: rosybrown;
+            width: 200px;
+            height: 40px;
+            font-size: 28px;
+        }
+
+        /*复合选择器(并集) : 通过逗号连接 , */
+        .asd4, #asd1, div {
+
+        }
+
+        /*指定标签选择器*/
+        div.asd4 {
+
+        }
+
+        div#asd1 {
+
+        }
+
+        /*后代选择器 , div中, 不管子元素还是孙元素, 只要等于 asd4就会被选中*/
+        div h3 {
+            color: #FFAA00;
+        }
+
+        /*子选择器 , 只能找到子标签*/
+        div > p {
+            background: #20B2AA;
+        }
+
+    </style>
+
+</head>
+<body>
+<p id="asd1">白日依山尽</p>
+<p id="asd2">黄河入海流</p>
+<p id="asd3">欲穷千里目</p>
+<p class="asd4">更上一层楼</p>
+<p>危楼高百尺</p>
+
+<div>
+    <h3>hello</h3>
+    <div>
+        <h3>西安</h3>
+    </div>
+    <p> 改改</p>
+</div>
+
+
+</body>
+</html>

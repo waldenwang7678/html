@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+
+        function employee(name, job, born) {
+            this.name = name;
+            this.job = job;
+            this.born = born;
+
+            this.fun = function asd(aaa) {
+                this.vvv = aaa;
+                this.qqq = function (value) {
+                    alert(value)
+                }
+            }
+        }
+
+        var bill = new employee("Bill Gates", "Engineer", 1985);
+
+        employee.prototype.salary = null;
+        bill.salary = 20000;
+
+        bill.name = "sf";
+
+        document.write(bill.salary);
+        alert(bill.name);
+        // bill.fun.qqq("asdasdasdasd");
+
+        alert(bill.fun("asd").vvv);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

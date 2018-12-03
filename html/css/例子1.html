@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>CSS的盒子模型</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        .newsBox {
+            width: 200px;
+            height: 150px;
+            border: 1px solid #d9e0ee;
+            border-top: 2px solid #ff8400;
+            margin: 10px auto;
+        }
+
+        .titleBox {
+            border-bottom: 1px solid #d9e0ee;
+            height: 35px;
+            line-height: 35px;
+            padding-left: 20px;
+            font-weight: 700;
+        }
+
+        .contentBox ul {
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        .contentBox li {
+            /*background-image: url("dot.png");*/
+            background-repeat: no-repeat;
+            background-position: left center;
+            padding-left: 10px;
+            line-height: 20px;
+        }
+
+        .contentBox a {
+            color: #666666;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .contentBox a:hover {
+            color: #DB6B12;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+<div class="newsBox">
+    <div class="titleBox">
+        今日新闻
+    </div>
+    <div class="contentBox">
+        <ul>
+            <li><a href="">诺基亚发布新款手机</a></li>
+            <li><a href="">英开始实施脱欧计划</a></li>
+            <li><a href="">有心课堂新课程上线</a></li>
+            <li><a href="">石家庄空气持续污染</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+
+</html>

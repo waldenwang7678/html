@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+        <script src="constants.js"></script>
+
+</head>
+<body>
+
+<select id="order" title="haha">
+
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+</select>
+
+<script>
+    $(document).ready(function () {
+        var optcontent;
+        var select = $("#order");
+        for (var key in order_json) {
+            optcontent = "<option value=" + key + ">" + order_json[key] + "</option>";
+            select.append(optcontent);
+        }
+        optcontent = "<option value=" + key + ">" + waldenWebHost + "</option>";
+        select.append(optcontent);
+    });
+</script>
+
+<p id="result"></p>
+</body>
+</html>

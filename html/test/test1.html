@@ -223,19 +223,25 @@
                           </div>
                         </span>
                                 <span data-userID="327" data-name="刘洋洋"
-                                      data-remark="放下你的浮躁，放下你的懒惰，放下你的三分钟热度，放空你禁不住诱惑的大脑，静下心来好好做你该做的事，该好好努力了，有时真的努力后，你会发现自己比想象的优秀很多，记住一句话：越努力，越幸运。"
+                                      data-remark="放下你的浮躁，放下你的懒惰，放下你的三分钟热度，
+                                      放空你禁不住诱惑的大脑，静下心来好好做你该做的事，该好好努力了，
+                                      有时真的努力后，你会发现自己比想象的优秀很多，记住一句话：越努力，越幸运。"
                                       data-imgSrc="images/20180422/1218380047.jpg>>>|||images/20180422/1218393463.jpg>>>|||"
                                       data-sex="2" class="love active">
                           <i class="iconfont icon-love"></i>
                         </span>
                                 <span data-userID="327" data-name="刘洋洋"
-                                      data-remark="放下你的浮躁，放下你的懒惰，放下你的三分钟热度，放空你禁不住诱惑的大脑，静下心来好好做你该做的事，该好好努力了，有时真的努力后，你会发现自己比想象的优秀很多，记住一句话：越努力，越幸运。"
+                                      data-remark="放下你的浮躁，放下你的懒惰，放下你的三分钟热度，
+                                      放空你禁不住诱惑的大脑，静下心来好好做你该做的事，该好好努力了，
+                                      有时真的努力后，你会发现自己比想象的优秀很多，记住一句话：越努力，越幸运。"
                                       data-imgSrc="images/20180422/1218380047.jpg>>>|||images/20180422/1218393463.jpg>>>|||"
                                       data-sex="2" class="vote-btn">我要投票</span>
                             </div>
                         </div>
                         <div data-userID="327" data-name="刘洋洋"
-                             data-remark="放下你的浮躁，放下你的懒惰，放下你的三分钟热度，放空你禁不住诱惑的大脑，静下心来好好做你该做的事，该好好努力了，有时真的努力后，你会发现自己比想象的优秀很多，记住一句话：越努力，越幸运。"
+                             data-remark="放下你的浮躁，放下你的懒惰，放下你的三分钟热度，
+                             放空你禁不住诱惑的大脑，静下心来好好做你该做的事，该好好努力了，
+                             有时真的努力后，你会发现自己比想象的优秀很多，记住一句话：越努力，越幸运。"
                              data-imgSrc="images/20180422/1218380047.jpg>>>|||images/20180422/1218393463.jpg>>>|||"
                              data-sex="2" class="img-box">
                             <img src="http://7d9l5w.com1.z0.glb.clouddn.com/images/HeadPic/20180422171041.jpg" alt="">
@@ -245,7 +251,10 @@
                                 <span><i class="iconfont icon-xingming"></i>刘洋洋</span>
                                 <span><i class="iconfont icon-dizhi"></i>河南省郑州市</span>
                             </div>
-                            <div><i class="iconfont icon-fatie"></i>放下你的浮躁，放下你的懒惰，放下你的三分钟热度，放空你禁不住诱惑的大脑，静下心来好好做你该做的事，该好好努力了，有时真的努力后，你会发现自己比想象的优秀很多，记住一句话：越努力，越幸运。
+                            <div>
+                                <i class="iconfont icon-fatie"></i>放下你的浮躁，放下你的懒惰，放下你的三分钟热度，
+                                放空你禁不住诱惑的大脑，静下心来好好做你该做的事，该好好努力了，有时真的努力后，
+                                你会发现自己比想象的优秀很多，记住一句话：越努力，越幸运。
                             </div>
                         </div>
                         <div class="data clear-both">
@@ -1277,25 +1286,30 @@
                 var name = $(this).attr("data-name");
                 var remark = $(this).attr("data-remark");
                 var imgSrc = $(this).attr("data-imgSrc");
-                var sex = $(this).attr("data-sex")
-                $("#name-box").html("<span>姓名：</span>" + name + " <a style='margin-left:80px; font-size:12px' href='/action/2018/pmt/index.aspx' target='_blank'> >>>看新品平面图软件发布会，赢免费软件</a>");
-                $("#remark-box").html("<span>签名：</span>" + remark + "");
+                var sex = $(this).attr("data-sex");
+                $("#name-box").html("&lt;span>姓名：&lt;/span>" + name + " &lt;a style='margin-left:80px; font-size:12px' href='/action/2018/pmt/index.aspx' target='_blank'> >>>看新品平面图软件发布会，赢免费软件&lt;/a>");
+                $("#remark-box").html("&lt;span>签名：&lt;/span>" + remark + "");
                 var imghtml = "";
-                if (imgSrc != "" && typeof (imgSrc) != "undefined") {
+                if (imgSrc !== "" &amp;&amp; typeof (imgSrc) !== "undefined") {
                     var img = imgSrc.split(">>>|||");
-                    for (var n = 0; n < img.length; n++) {
-                        if (img[n] != "") {
+                    for (var n = 0; n &lt; img.length; n++) {
+                        if (img[n] !== "") {
                             var ext = img[n].substring(img[n].indexOf("."), img[n].length);
                             if (ext.indexOf("mp4") >= 0) {
-                                imghtml += " <video autoplay=\"autoplay\" style=\" height:100%; margin-left:10px;\" src=\"http://7d9l5w.com1.z0.glb.clouddn.com/" + img[n] + "\"></video>";
+                                imghtml += " &lt;video autoplay=\"autoplay\" " +
+                                    "style=\" height:100%; " +
+                                    "margin-left:10px;\" " +
+                                    "src=\"http://7d9l5w.com1.z0.glb.clouddn.com/" +
+                                    img[n] +
+                                    "\"></video>";
                             }
                             else
-                                imghtml += " <img src=\"http://7d9l5w.com1.z0.glb.clouddn.com/" + img[n] + "\">";
+                                imghtml += " &lt;img src=\"http://7d9l5w.com1.z0.glb.clouddn.com/" + img[n] + "\">";
                         }
                     }
                 }
                 $("#userImg").html(imghtml);
-                if (sex == 1) {
+                if (sex === 1) {
                     //男性标签
                     $("#m_impress").show();
                     $("#f_impress").hide();
@@ -1336,7 +1350,7 @@
             //标签的出现隐藏
             $("#tagBtn").click(function () {
                 $("#tagBox").slideToggle();
-            })
+            });
             $("#tag_btn").click(function () {
                 var isUnexcuse = getCookie("isUnexcuse");
                 if (isUnexcuse == "1") {

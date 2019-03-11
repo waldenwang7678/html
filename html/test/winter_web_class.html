@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>winter_web_class</title>
+
+    <script>
+        console.log(Math.abs(0.1 + 0.2 - 0.3) <= Number.EPSILON);
+        console.log(0.1 + 0.2 === 0.3);
+
+        const o = {};
+        o[Symbol.iterator] = function () {
+            let v = 0;
+            return {
+                next: function () {
+                    return {value: v++, done: v > 10}
+                }
+            }
+        };
+
+        for (let v of o) {
+            console.log(v); // 0 1 2 3 ... 9
+        }
+        console.log("abc".charAt(0)); //a
+        var img = new Image();
+
+
+        var iframe = document.createElement('iframe');
+        document.documentElement.appendChild(iframe);
+
+        iframe.src="javascript:var b = {};" ;
+
+        var b1 = iframe.contentWindow.b;
+        var b2 = {};
+
+        console.log(typeof b1, typeof b2); //object object
+
+        console.log(b1 instanceof Object, b2 instanceof Object); //false true
+
+
+    </script>
+
+</head>
+<body>
+
+
+</body>
+</html>

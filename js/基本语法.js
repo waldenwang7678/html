@@ -22,7 +22,7 @@ function write_asd() {
 
 function get_name() {
     alert(name);
-    var name = 'wang';
+    let name = 'wang';
     alert(name);
 }
 

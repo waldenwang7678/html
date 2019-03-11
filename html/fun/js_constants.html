@@ -1,12 +1,17 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+
     <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="动态添加选项,全局变量">
+    <meta name="keyword" content="搜索关键字">
+
+
     <script src="../../js/jquery-3.2.1.min.js"></script>
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-
-        <script src="constants.js"></script>
+    <script src="constants.js"></script>
 
 </head>
 <body>
@@ -24,6 +29,7 @@
         for (var key in order_json) {
             optcontent = "<option value=" + key + ">" + order_json[key] + "</option>";
             select.append(optcontent);
+
         }
         optcontent = "<option value=" + key + ">" + waldenWebHost + "</option>";
         select.append(optcontent);

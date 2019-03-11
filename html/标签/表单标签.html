@@ -37,14 +37,20 @@
 <br><br>
 <form id="userform" action="http://www.walden-wang.cn" title="用户注册表单"
       target="_self" enctype="multipart/form-data" method="post">
+
     <fieldset>
         <legend>用户注册信息</legend>
         <br>
-        昵称:<input type="text" name="un" maxlength="12" value="walden"><br><br>
-        密码:<input type="password" name="pwd" maxlength="10"><br><br>
-        性别:<input type="radio" name="gender" value="man" checked="checked"> 男
-        <input type="radio" name="gender" value="women"> 女 <br><br>
-        头像:<input id="userphoto" type="file" name="profile"><br><br>
+        昵称:<input type="text" name="un" maxlength="12" value="walden">
+        <br><br>
+        密码:<input type="password" name="pwd" maxlength="10">
+        <br><br>
+        性别:
+        <input type="radio" name="gender" value="man" checked="checked"> 男
+        <input type="radio" name="gender" value="women"> 女
+        <br><br>
+        头像:<input id="userphoto" type="file" name="profile">
+        <br><br>
         籍贯:
         <select name="province">
             <option>河北</option>
@@ -52,8 +58,10 @@
             <option>湖南</option>
             <option selected="selected">湖北</option>
             <option>广州</option>
-        </select><br><br>
-        爱好:<input type="checkbox" name="hobby"> 读书
+        </select>
+        <br><br>
+        爱好:
+        <input type="checkbox" name="hobby"> 读书
         <input type="checkbox" name="hobby"> 游泳
         <input type="checkbox" name="hobby"> 画画
         <input type="checkbox" name="hobby"> 骑马
@@ -72,13 +80,13 @@
         <input type="submit" value="开始注册">
         <input type="reset" name="重置信息">
 
-
     </fieldset>
 </form>
-毕业院校:<input type="text" name="scroll" form="userform">
-
+<br>
 
 <form action="url" method="post">
+    毕业院校:<input type="text" name="scroll" form="userform">
+    <br><br>
     请输入你喜欢的城市: <input type="text" name="name" list="namelist">
     <datalist id="namelist">
         <option>北京</option>
@@ -89,7 +97,8 @@
 
 </form>
 <br><br>
-
+<hr>
+<br>
 
 <form>
     用户名:<input type="text" name="name"><br><br>
@@ -97,7 +106,8 @@
     密码:<input type="password" name="pwd"><br><br>
 
     <input type="submit" name="login" value="登录" formaction="http://www.walden-wang.cn"
-           formmethod="post" formtarget="_self" formenctype="multipart/form-data"> <br><br>
+           formmethod="post" formtarget="_self" formenctype="multipart/form-data">
+    <br><br>
     <input type="submit" name="regest" value="注册" formaction="http://www.baidu.com"
            formmethod="post" formtarget="_self" formenctype="multipart/form-data">
 

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>背景图片使用</title>
+
+    <style type="text/css">
+
+        #root {
+            width: 200px;
+            height: 300px;
+        }
+
+        #goods_type {
+            background-color: #20B2AA;
+            height: 60px;
+            background-image: url("../../img/enter_blue_up.png");
+            background-repeat: no-repeat;
+            background-position: right;
+            background-position-x: right;
+        }
+
+        #goods_title {
+            text-align: center;
+            line-height: 60px;
+        }
+
+        #goods_list {
+            background-color: #999999;
+        }
+
+        ul li {
+            list-style-position: outside;
+            list-style-image: url("../../img/dot.png");
+            background-image: url("../../img/enter_blue.png");
+            background-repeat: no-repeat;
+            background-position: right;
+            line-height: 45px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="root">
+    <div id="goods_type">
+        <h3 id="goods_title">商品分类</h3>
+    </div>
+
+    <div id="goods_list">
+        <ul>
+            <li> 图片 音响</li>
+            <li>电脑 手机 电子产品</li>
+            <li>女装 女鞋 女包</li>
+            <li>日用家居</li>
+            <li>皮包 钟表</li>
+            <li>保健</li>
+
+        </ul>
+    </div>
+
+</div>
+</body>
+</html>

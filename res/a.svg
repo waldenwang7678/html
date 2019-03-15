@@ -1,0 +1,55 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 596.26702 842.8822"
+     xmlns="http://www.w3.org/2000/svg">
+    <title>ES8ACC001</title>
+    <g id="版心">
+        <text font-family="Arial-BoldMT, Arial" font-size="15"
+              font-weight="700" letter-spacing="0.04001em" transform="translate(348.15768 87.22945)">
+            <tspan xml:space="preserve">ES8ACC001  2017/10/11</tspan>
+        </text>
+        <rect fill="none" height="841.89008" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="0.99213"
+              width="595.27489" x="0.49606" y="0.49606"/>
+    </g>
+    <g id="编号">
+        <text font-family="Arial-BoldMT, Arial" font-size="18"
+              font-weight="700" transform="translate(396.80193 550.57378)">4
+        </text>
+        <text font-family="Arial-BoldMT, Arial" font-size="18"
+              font-weight="700" transform="translate(412.48556 317.17772)">2
+        </text>
+        <text font-family="Arial-BoldMT, Arial" font-size="18"
+              font-weight="700" transform="translate(207.99622 309.7819)">1
+        </text>
+        <text font-family="Arial-BoldMT, Arial" font-size="18"
+              font-weight="700" transform="translate(519.47189 342.06125)">3
+        </text>
+    </g>
+    <g id="引线">
+        <line fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" x1="411.48557" x2="391.64305"
+              y1="310.99605" y2="310.99605"/>
+        <line fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" x1="518.72145" x2="498.87893"
+              y1="335.82939" y2="335.82939"/>
+        <line fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" x1="212.83346" x2="212.83346"
+              y1="311.82121" y2="331.66373"/>
+        <line fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" x1="402.62681" x2="402.62681"
+              y1="515.99923" y2="535.84175"/>
+    </g>
+    <g id="流程线">
+        <path
+                d="M467.28555,626.293c1.6406-2.8223,4.9522-8.5234,4.9522-8.5234l-5.8496-3.4805v3.081l-15.7999,8.6495v7.6894l2.3204,1.3106"
+                stroke="#000" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="0.5" transform="translate(0.52096 0.49606)"/>
+        <polygon
+                fill="#fff"
+                points="469.229 619.177 469.229 616.096 475.079 619.576 469.229 629.646 469.229 626.611 453.43 635.516 453.43 627.826 469.229 619.177"
+                stroke="#000" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="0.5"/>
+        <line fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" x1="392.84859" x2="108.30892"
+              y1="344.78157" y2="509.06062"/>
+        <polyline fill="none"
+                  points="260.408 598.034 544.783 433.851 544.845 433.815 392.862 344.757" stroke="#000"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+        <line fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" x1="108.36885" x2="259.95419"
+              y1="509.40477" y2="598.2294"/>
+    </g>
+</svg>

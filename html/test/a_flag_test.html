@@ -6,27 +6,33 @@
 
     <style type="text/css">
         a {
-            display: block;
-            margin-left: 200px;
+            display: block;;
             width: 300px;
             height: 50px;
             background: #46F3B6;
-            margin-bottom: 30px;
+            margin-bottom: 5px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            line-height: 50px;
+
         }
     </style>
 
     <script>
 
+        // 显示a标签指向的地址
         function asd(object) {
             alert(object.href)
         }
 
+        // 移除a标签指向的地址
         function remove_href() {
-            var as = document.getElementsByTagName("a");
-            for (var i = 0; i < as.length; i++) {
+            let as = document.getElementsByTagName("a");
+            for (let i = 0; i < as.length; i++) {
                 (function (index) {
-                        var value1 = as[i].href;
-                        var value = as[i].innerText;
+                        let value1 = as[i].href;
+                        let value = as[i].innerText;
                         as[i].href = 'javascript:void(0);';
                         as[i].onclick = function (ev) {
                             alert(value1);
@@ -36,6 +42,7 @@
             }
         }
 
+        // 显示a标content
         function getHref(obj) {
             alert(obj.innerText);
         }
@@ -43,7 +50,7 @@
 </head>
 <body>
 
-<a href="addImageClick.html" onclick="asd(this)">正常跳转</a>
+<a href="addImageClick.html" onclick="asd(this)" target="_blank">正常跳转</a>
 
 <a href="javascript:void(0);" onclick="asd(this)"> 空跳转</a>
 
@@ -53,9 +60,13 @@
 
 <a href="http://www.baidu.com" onclick="getHref(this)">点我</a>
 
-<a href="mailto:767884538@qq.com" > 邮件</a>
+<a href="mailto:767884538@qq.com"> 邮件</a>
 
 <button onclick="remove_href()"> remove_href</button>
+
+<a href="../css/float属性.html#anchor_tag">跳转_锚点</a>
+
+
 
 
 

@@ -69,6 +69,7 @@
         <br><br>
         个人简介:
         <br>
+        <!--多行文本域-->
         <textarea name="introduce" cols="40">输入个人简介</textarea>
         <br><br>
         个人网站:<input type="url" name="userurl"><br><br>
@@ -105,11 +106,17 @@
 
     密码:<input type="password" name="pwd"><br><br>
 
+    <!--点击文字后, for属性绑定id对应的 input 会获取焦点-->
+    <label for="uname">用户名</label>
+    <input type="text" name="username" id="uname">
+
+
     <input type="submit" name="login" value="登录" formaction="http://www.walden-wang.cn"
            formmethod="post" formtarget="_self" formenctype="multipart/form-data">
     <br><br>
     <input type="submit" name="regest" value="注册" formaction="http://www.baidu.com"
            formmethod="post" formtarget="_self" formenctype="multipart/form-data">
+
 
 </form>
 

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style type="text/css">
+        #ha {
+            color: #8c022b;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        #location {
+            position: center;
+            float: initial;
+            text-align: justify;
+            text-decoration: line-through;
+
+        }
+        #location_layout{
+            text-indent: 2em;
+            line-height:30px;
+        }
+
+        #ff{
+            vertical-align: middle;
+        }
+        /*未访问状态*/
+        a:link{ color: #7FFF00 ; font-size: 20px}
+        /*悬停状态*/
+        a:hover{color: #20B2AA ; font-size: 22px}
+        /*鼠标按下状态*/
+        a:active{color: yellow;font-size: 18px}
+        /*鼠标释放*/
+        a:visited{color: red;font-size: 20px}
+        a{ text-decoration: none}
+    </style>
+</head>
+<body>
+
+
+<h3 id="ha"> asd </h3>
+<p id="location_layout">
+<span id="location">Java通过Executors提供四种线程池，分别为：
+newCachedThreadPool创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。
+newFixedThreadPool 创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。
+newScheduledThreadPool 创建一个定长线程池，支持定时及周期性任务执行。
+newSingleThreadExecutor 创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。
+</span>
+</p>
+
+<img src="../../img/cc.jpg" id="ff">  cc
+
+<ul>
+    <li><a href="#">公司介绍</a></li>
+    <li><a href="#">产品展示</a></li>
+    <li><a href="#">综合评价</a></li>
+</ul>
+</body>
+</html>

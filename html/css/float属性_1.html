@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>浮动元素_1</title>
+    <style type="text/css">
+
+        #root_div {
+            padding: 5px;
+            border: #7FFF00 1px solid;
+            /* hidden : 动态设置盒子边框尺寸 */
+            overflow: hidden;
+        }
+
+        .f1 {
+            position: absolute;
+            left: 100px;
+            top: 300px;
+        }
+
+        .f2 {
+            float: left;
+            margin-top: 20px;
+            margin-right: 40px;
+            margin-left: 40px;
+        }
+
+        .f3 {
+            float: left;
+            margin-top: 30px;
+            margin-right: 3em;
+        }
+
+        .f4 {
+            float: left;
+            /*宽度限制*/
+            width: 40%;
+
+        }
+
+        img#img_1 {
+            /*设置图片模糊*/
+            -webkit-filter: blur(3px); /* Chrome, Safari, Opera */
+            filter: blur(3px);
+        }
+
+        img#img_2 {
+            /*设置图片阴影*/
+            -webkit-filter: drop-shadow(8px 8px 10px green); /* Chrome, Safari, Opera */
+            filter: drop-shadow(8px 8px 10px green);
+        }
+
+        img#img_3 {
+            /*设置图片模糊*/
+            /*-webkit-filter: blur(3px);*/
+            -webkit-filter: drop-shadow(8px 8px 10px red);
+            /*filter: blur(3px);*/
+        }
+
+    </style>
+</head>
+<body>
+<!--滚动方向 : behavor="alternate" , scroll-->
+<marquee behavor="alternate" bgcolor="#ceffc2" direction="up" height="50px" loop="10" scrollamount="20"> 天青色等烟雨 </marquee>
+
+<div id="root_div">
+
+
+    <div class="f1"><img id="img_1" src="../../img/cc.jpg">
+        <h3>1</h3></div>
+    <div class="f2"><img id="img_2" src="../../img/cc.jpg">
+        <h3>2</h3></div>
+    <div class="f3"><img id="img_3" src="../../img/cc.jpg">
+        <h3>3</h3></div>
+
+    <div class="f4">
+        <span>
+            浮动的框可以
+            向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止。
+        由于浮动框不在文档的普通流中，所以文档的普通流中的块
+           框表现得就像浮动框不存在一样。浮动的框可以浮动的框可以
+            向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止。
+        由于浮动框不在文档的普通流中，所以文档的普通流中的块
+           框表现得就像浮动框不存在一样。浮动的框可以浮动的框可以
+            向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止。
+        由于浮动框不在文档的普通流中，所以文档的普通流中的块
+           框表现得就像浮动框不存在一样。浮动的框可以
+        </span>
+    </div>
+</div>
+</body>
+</html>

@@ -7,7 +7,6 @@
 
     <!--浮动 , 浏览器规定块级元素纵向排列, 内联元素横向排列, 浮动是改变排列方向, 把纵向改为横向,-->
     <style type="text/css">
-
         * {
             padding: 0;
             margin: 0;
@@ -52,7 +51,7 @@
         }
 
         /*导航栏*/
-        ul {
+        ul.title_bar {
             margin: 0;
             padding: 0;
             list-style-type: none;
@@ -60,13 +59,13 @@
             background-color: #272822;
         }
 
-        li {
+        ul li.title_bar_li {
             list-style: none;
             float: left;
             width: auto;
         }
 
-        li a {
+        li.title_bar_li > a {
             display: block;
             color: white;
             text-align: center;
@@ -231,15 +230,24 @@
             zoom: 1;
         }
 
+        div.top_content {
+            padding: 30px;
+            background: tomato;
+        }
+
     </style>
 
 </head>
 <body>
-<p>
-    1 ,使用了float的元素会脱离标准流不再占原来的位置<br>
-    2 ,几个块级元素(比如div)同时使用float时它们将在同一行显示<br>
-    3 ,float可将行内元素转化为行内块元素<br>
-</p>
+<div class="top_content">
+    <ol type="A">
+        <li>使用了float的元素会脱离标准流不再占原来的位置</li>
+        <li>几个块级元素(比如div)同时使用float时它们将在同一行显示</li>
+        <li>float可将行内元素转化为行内块元素</li>
+        <li>浮动元素浮动之后的位置, 由浮动元素浮动之前在标准流的位置确定, 跟浮动前在同一行</li>
+        <li>一般企业开发中, 水平方向考虑使用浮动流, 竖直方向使用标准流</li>
+    </ol>
+</div>
 
 <div id="asd">今天你好吗</div>
 <div id="asd1">李g</div>
@@ -279,11 +287,11 @@
 </div>
 
 <!--制作导航栏-->
-<ul>
-    <li><a href="http://www.baidu.com">百度</a></li>
-    <li><a href="http://www.sina.com">新浪</a></li>
-    <li><a href="http://www.qq.com">腾讯</a></li>
-    <li><a href="http://www.jingdong.com">京东</a></li>
+<ul class="title_bar">
+    <li class="title_bar_li"><a href="http://www.baidu.com">百度</a></li>
+    <li class="title_bar_li"><a href="http://www.sina.com">新浪</a></li>
+    <li class="title_bar_li"><a href="http://www.qq.com">腾讯</a></li>
+    <li class="title_bar_li"><a href="http://www.jingdong.com">京东</a></li>
 </ul>
 
 <!--网页布局-->

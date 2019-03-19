@@ -10,18 +10,124 @@
             color: chartreuse;
             background: #ceffc2;
         }
+
+        .style_inherited {
+            color: #DB6B12;
+            font-style: italic;
+            text-align: left;
+            width: 40%;
+            background: #d9e0ee;
+            float: left;
+            margin-bottom: 20px;
+            padding: 4px;
+        }
+
+        .stack_up {
+            padding: 10px;
+            margin-left: 20px;
+            float: right;
+            width: 40%;
+            background: bisque;
+        }
+
+        .priority {
+            background: #f2f2f0;
+            width: 40%;
+            clear: left;
+            float: left;
+            padding: 6px;
+            color: red !important;
+        }
+        .weight{
+            padding: 10px;
+            float: right;
+            width: 40%;
+            background: pink;
+        }
     </style>
 
 </head>
 <body>
 
-<h3>梦里花</h3>
+<div> css 三大特性:
+    <ul>
+        <li>继承性</li>
+        <li>层叠性</li>
+        <li>优先级</li>
+
+    </ul>
+
+</div>
 
 
-<h3 style="color: red;background: antiquewhite">欧若拉</h3>
+<div class="style_inherited">
+    <h2>继承性</h2>
+    <p>
+        css属性继承, 只有以 color, font, line, text 开头的属性才可以被继承<br>
+        不仅儿子可以继承, 后代都可以继承属性<br>
+        特殊性: <br>
+    </p>
+    <ol>
+        <li>a标签的颜色和下划线不能继承</li>
+        <li>h标签文字大小不能继承</li>
+
+    </ol>
+</div>
 
 
-<h3 id="haha">淋雨一直走</h3>
+<div class="stack_up">
+    <h2>层叠性</h2>
+    css 处理冲突的一种能力, 同一属性多次设置, 只有一种起作用
+    <small>css 层叠式样式表</small>
+</div>
 
+<div class="priority">
+
+    <h2>优先级</h2>
+    <h3>梦里花
+        <small style="color: red"> 文件内 css 设置属性</small>
+    </h3>
+
+    <h3 style="color: red;background: antiquewhite">欧若拉
+        <small style="color: red">
+            标签内css 设置属性
+        </small>
+    </h3>
+
+    <h3 id="haha">淋雨一直走&nbsp;&nbsp;&nbsp;
+        <small style="color: red">
+            外部css文件通过 id设置属性, 优先级大于标签
+        </small>
+    </h3>
+    <div> !important : 提高css修饰的属性优先级, 注意点:
+        <ul>
+            <li>!important 只能用于直接选中, 不能用于间接选中</li>
+            <li>通配符选中的标签也是直接选中的</li>
+            <li>只能提升被指定的属性优先级, 对其他属性无作用</li>
+            <li>必须写在属性值的分号前面</li>
+            <li>!important 前面的! 不能省略</li>
+        </ul>
+    </div>
+
+</div>
+
+<div class="weight" >
+    <h2>权重</h2>
+    当多个选择器混合使用, 选中同一个标签时, 权重判断规则:
+    <ol>
+        <li>先计算id数量, id多的优先级大</li>
+        <li>如果id数量相同, 类名多的优先级大</li>
+        <li>如果id和类名数量相同, 标签名多的优先级大</li>
+        <li>如果id,类名,标签名数量都相同, 谁在后面谁的优先级大</li>
+    </ol>
+
+</div>
+
+
+<div>
+    css 精灵图
+
+
+</div>
 </body>
 </html>

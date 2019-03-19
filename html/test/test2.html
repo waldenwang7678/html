@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <img class="img_size"
+         src="../../img/aaa.jpeg"/>
+
+    <img class="img_size"
+         src="http://7d9l5w.com1.z0.glb.clouddn.com/images/HeadPic/20180418171018.png">
+
+    <script>
+        function setImgSize(width, height) {
+            const imgs = document.getElementsByTagName("img");
+            for (let i = 0; i < imgs.length; i++) {
+                imgs[i].setAttribute("width", width+"px");
+                imgs[i].setAttribute("height", height+"px");
+            }
+        }
+        setImgSize(200 , 200);
+
+    </script>
+
+</div>
+</body>
+
+</html>

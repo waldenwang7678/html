@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue/"></script>-->
+    <script src="../js/vue.min.js"></script>
+
+</head>
+<body>
+
+<script>
+    // 定义名为 todo-item 的新组件
+    Vue.component('todo-item', {
+        template: '<li>这是个待办项</li>'
+    });
+
+</script>
+
+<ol>
+    <!-- 创建一个 todo-item 组件的实例 -->
+    <todo-item></todo-item>
+</ol>
+
+
+<div id="app-7">
+    <ol>
+        <!--
+          现在我们为每个 todo-item 提供 todo 对象
+          todo 对象是变量，即其内容可以是动态的。
+          我们也需要为每个组件提供一个“key”，稍后再
+          作详细解释。
+        -->
+        <todo-item1 v-for="item in groceryList"
+                    v-bind:todo="item"
+                    v-bind:key="item.id">
+        </todo-item1>
+    </ol>
+</div>
+
+
+<div id="example">
+    <p>Original message: "{{ message }}"</p>
+    <p>Computed reversed message: "{{ reversedMessage }}"</p>
+</div>
+
+<div id="demo">{{ fullName }}</div>
+<div id="demo1">{{ fullName }}</div>
+
+
+<div id="watch-example">
+    <p>
+        Ask a yes/no question:
+        <input v-model="question">
+    </p>
+    <p>{{ answer }}</p>
+</div>
+
+<div id="temp_if">
+    <!--在 template 标签上使用 if 条件分组-->
+    <template v-if="ok">
+        <h1>Title</h1>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+    </template>
+    <h3 v-else>不存在的</h3>
+    <button v-on:click="bt_click">{{is_exit}}</button>
+</div>
+</body>
+
+<script>
+
+    Vue.component('todo-item1', {
+        // todo-item 组件现在接受一个
+        // "prop"，类似于一个自定义特性。
+        // 这个 prop 名为 todo。
+        props: ['todo'],
+        template: '<li>{{ todo.text }}</li>'
+    });
+
+    var vm_1 = new Vue({
+        el: '#app-7',
+        data: {
+            groceryList: [
+                {id: 0, text: '蔬菜'},
+                {id: 1, text: '奶酪'},
+                {id: 2, text: '随便其它什么人吃的东西'}
+            ]
+        },
+        //实例被创建之后调用的方法
+        created: function () {
+            console.log("asd");
+        }
+    });
+
+
+</script>
+<script>
+    var asd = "dddqqqrrr";
+    var vm_2 = new Vue({
+        el: '#example',
+        data: {
+            message: 'Hello'
+        },
+        computed: {
+            // 计算属性的 getter
+            reversedMessage: function () {
+                // `this` 指向 vm 实例
+                // 返回值根据响应式依赖的变化而变化, 如果响应式依赖不变化, reverseMessage 的值会一直不变
+                // reverseMessage计算属性是基于响应式依赖进行缓存的, 多次调用,只计算一次, 取之前的缓存值
+                // 响应式依赖变化, 此方法就会执行 , message是响应式依赖
+                return this.message.split('').reverse().join('')
+            }
+        },
+    });
+
+
+    var vm_3 = new Vue({
+        el: '#demo',
+        data: {
+            firstName: 'Foo',
+            lastName: 'Bar',
+            fullName: 'Foo Bar'
+        },
+        // 监听 firstName 和 lastName 的变化
+        watch: {
+            firstName: function (val) {
+                this.fullName = val + ' ' + this.lastName
+            },
+            lastName: function (val) {
+                this.fullName = this.firstName + ' ' + val
+            }
+        }
+    });
+
+
+    var vm_4 = new Vue({
+
+        el: '#demo1',
+        data: {
+            firstName: "qw",
+            lastName: "er",
+            fullName: "qwer"
+        },
+        computed: {
+            fullName: {
+                // getter
+                get: function () {
+                    return this.firstName + ' ' + this.lastName
+                },
+                // setter
+                set: function (newValue) {
+                    let names = newValue.split(' ');
+                    this.firstName = names[0];
+                    this.lastName = names[names.length - 1]
+                }
+            }
+        }
+    });
+
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+<script>
+    var watchExampleVM = new Vue({
+        el: '#watch-example',
+        data: {
+            question: '',
+            answer: 'I cannot give you an answer until you ask a question!'
+        },
+        watch: {
+            // 如果 `question` 发生改变，这个函数就会运行
+            question: function (newQuestion, oldQuestion) {
+                this.answer = 'Waiting for you to stop typing...';
+                this.debouncedGetAnswer()
+            }
+        },
+        created: function () {
+            // `_.debounce` 是一个通过 Lodash 限制操作频率的函数。
+            // 在这个例子中，我们希望限制访问 yesno.wtf/api 的频率
+            // AJAX 请求直到用户输入完毕才会发出。想要了解更多关于
+            // `_.debounce` 函数 (及其近亲 `_.throttle`) 的知识，
+            // 请参考：https://lodash.com/docs#debounce
+            this.debouncedGetAnswer = _.debounce(this.getAnswer, 500)
+        },
+        methods: {
+            getAnswer: function () {
+                if (this.question.indexOf('?') === -1) {
+                    this.answer = 'Questions usually contain a question mark. ;-)';
+                    return
+                }
+                this.answer = 'Thinking...';
+                let vm = this;
+                axios.get('https://yesno.wtf/api')
+                    .then(function (response) {
+                        vm.answer = _.capitalize(response.data.answer)
+                    })
+                    .catch(function (error) {
+                        vm.answer = 'Error! Could not reach the API. ' + error
+                    })
+            }
+        }
+    })
+</script>
+
+<script>
+    new Vue({
+        el: '#temp_if',
+        data: {
+            ok: true,
+            is_exit: "存在"
+        },
+        methods: {
+            bt_click: function () {
+                this.ok = !this.ok
+            }
+        },
+        computed: {
+            // 计算值
+            // is_exit: function () {
+            //     return this.ok ? "存在" : "不存在";
+            // }
+
+        },
+        watch: {
+            // 函数返回
+            ok: function () {
+                return this.ok ? this.is_exit = "存在" : this.is_exit = "不存在";
+            }
+        }
+
+
+    });
+
+</script>
+
+</html>

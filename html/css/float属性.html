@@ -12,37 +12,6 @@
             margin: 0;
         }
 
-        /*多个块级元素同时使用 float 元素 , 在同一行显示*/
-        #asd {
-            float: left;
-            width: 80px;
-            height: 60px;
-            background: #ceffc2;
-        }
-
-        #asd1 {
-            float: left;
-            width: 120px;
-            height: 60px;
-            background: #FFAA00;
-        }
-
-        #asd2 {
-            float: left;
-            width: 100px;
-            height: 60px;
-            background: #d9e0ee;
-        }
-
-        /*将行内元素转换成行内块元素 , 使用转换时建议用display,
-        */
-        #block > strong {
-            float: left;
-            width: 100px;
-            height: 100px;
-            background: violet;
-        }
-
         /*图文环绕*/
         #img_layout > img {
             float: left;
@@ -231,8 +200,49 @@
         }
 
         div.top_content {
-            padding: 30px;
+            padding: 10px 10px 10px 30px;
             background: tomato;
+            width: 50%;
+        }
+
+        div.clear_float {
+            float: left;
+            width: 40%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 30px;
+            background: #20B2AA;
+        }
+
+        /*多个块级元素同时使用 float 元素 , 在同一行显示*/
+        #asd {
+            float: left;
+            width: 80px;
+            height: 60px;
+            background: #ceffc2;
+        }
+
+        #asd1 {
+            float: left;
+            width: 120px;
+            height: 60px;
+            background: #FFAA00;
+        }
+
+        #asd2 {
+            float: left;
+            width: 100px;
+            height: 60px;
+            background: #d9e0ee;
+        }
+
+        /*将行内元素转换成行内块元素 , 使用转换时建议用display,
+       */
+        #asd3 > strong {
+            float: left;
+            width: 100px;
+            height: 100px;
+            background: violet;
         }
 
     </style>
@@ -240,25 +250,59 @@
 </head>
 <body>
 <div class="top_content">
-    <ol type="A">
+    <h3>浮动属性</h3>
+    <ol>
         <li>使用了float的元素会脱离标准流不再占原来的位置</li>
         <li>几个块级元素(比如div)同时使用float时它们将在同一行显示</li>
         <li>float可将行内元素转化为行内块元素</li>
         <li>浮动元素浮动之后的位置, 由浮动元素浮动之前在标准流的位置确定, 跟浮动前在同一行</li>
         <li>一般企业开发中, 水平方向考虑使用浮动流, 竖直方向使用标准流</li>
+        <li>标准流中的内容能撑起父布局的高度, 浮动流不可以</li>
+        <li>清除浮动后, margin 无效, 除非父布局添加 border</li>
+        <li></li>
     </ol>
+</div>
+
+<div class="clear_float">
+    <h4>清除浮动的方式</h4>
+    <ol>
+        <li>给前一个父元素设置高度(企业开发中不推荐这种方式)</li>
+        <li>添加 clear属性</li>
+        <li>隔墙法<br>
+            &nbsp;&nbsp;<span style="color: orange">内墙法:</span> 在第一个盒子末尾添加额外块级元素 , 设置 clear:both;
+            可以让第二个盒子使用 marginTop 属性, <span style="color: red;font-style: italic">也可以</span>让第一个盒子使用 marginBottom属性<br>
+
+            &nbsp;&nbsp;<span style="color: orange">外墙法:</span> 两个盒子中间添加额外的块级元素并设置 clear:both;
+            可以让第二个盒子使用 marginTop 属性, 第一个盒子<span style="color: red; font-style: italic">不能</span>使用 marginBottom属性 <br>
+
+            &nbsp;&nbsp; <span style="color: orange">区别:</span> 外墙法不能撑起第一个盒子的高度, 内墙法能撑起第一个盒子的高度,
+        </li>
+        <li>用伪元素选择器添加<span style="color: red">内墙</span>实现清除浮动,
+            伪元素选择器不兼容 ie6, 第一个盒子添加.box1{ *zoom:1 }
+        </li>
+        <li>第一个盒子添加 overflow:hidden 属性清除浮动, 使用上诉方法做ie6的兼容
+            <div style="padding-left: 20px;background: #46F3B6">
+                overflow:hidden 作用:
+                <ol>
+                    <li>超出标签部分剪出</li>
+                    <li>清除浮动</li>
+                    <li>里面的盒子设置 margin-top后, 外面的盒子不会被顶下来</li>
+                </ol>
+
+            </div>
+        </li>
+        <li>企业开发中不常用隔墙法, 新增无用布局</li>
+
+    </ol>
+
+
 </div>
 
 <div id="asd">今天你好吗</div>
 <div id="asd1">李g</div>
 <div id="asd2">郭靖</div>
 
-<div id="block">
-    <strong>
-        忽如一夜春风来
-    </strong>
-
-</div>
+<div id="asd3"><strong>忽如一夜春风来</strong></div>
 
 
 <p>float 的使用场景</p>
@@ -283,7 +327,6 @@
         今予问乎若，若知之，奚故不近？”黄帝曰：“彼其真是也，以其不知也；此其似之也，以其忘之也；予与若终不近也，以其知之也。
         ”狂屈闻之，以黄帝为知言。
     </p>
-
 </div>
 
 <!--制作导航栏-->

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.min.js"></script>
+
+
+</head>
+<body>
+<div id="login_layout">
+    <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <!-- 添加 key 不再复用 input -->
+        <input placeholder="Enter your username" key="username-input">
+    </template>
+    <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address" key="email-input">
+    </template>
+
+    <button v-on:click="switch_login_type">切换登录方式</button>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#login_layout',
+        data: {
+            loginType: 'username'
+        },
+        methods: {
+            switch_login_type: function () {
+                if (this.loginType === 'username') {
+                    this.loginType = 'userEmail';
+                } else {
+                    this.loginType = 'username';
+                }
+            }
+        }
+
+    });
+
+</script>
+
+</body>
+
+
+</html>

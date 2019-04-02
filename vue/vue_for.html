@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="../js/vue.min.js"></script>
+
+    <style>
+        ul {
+            /*去掉前缀圆点*/
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="example-1">
+    <ul>
+        <!--可以使用 in 或者 for , 遍历一个list -->
+        <li v-for="(item, position ) in items">
+            {{parentMsg}}--{{ item.message }}-{{position}}
+        </li>
+    </ul>
+</div>
+
+<div id="example-2">
+
+
+    <ul style="float: left;background: #DB6B12">
+        <!--可以使用 in 或者 for , 遍历一个list -->
+        <li v-for="value in object">
+            {{value}}
+        </li>
+    </ul>
+
+    <ul style="float: left;background: #ceffc2;margin-left: 40px">
+        <!--可以使用 in 或者 for , 遍历一个map -->
+        <!--value 在前, key在后-->
+        <li v-for="(value, key) in object">
+            {{key}} : {{value}}
+        </li>
+    </ul>
+
+    <ul style="float:left;background: #46F3B6;margin-left: 40px">
+        <!--可以使用 in 或者 for , 遍历一个map -->
+        <!--value 在前, key在后-->
+        <li v-for="(value,key,index) in object">
+            {{index}}.{{key}} : {{value}}
+        </li>
+    </ul>
+    <ul style="clear: left">
+        <li v-for="n in evenNumbers">{{ n }}</li>
+    </ul>
+
+    <div>
+        <span style="margin-left: 10px;background: #CBE923" v-for="n in 10">{{ n }} </span>
+    </div>
+
+    <br/>
+    <span> v-for on a &lt;template&gt; </span>
+    <ul>
+        <template v-for="item in items">
+            <li>消息: {{item.time}} : {{ item.msg }}</li>
+            <li class="divider" role="presentation"></li>
+        </template>
+    </ul>
+
+    <ul>
+        <!--v-if 可以添加 js条件语句-->
+        <li v-for="num in numbers" v-if="num > 3" style="float: left; margin-left: 10px">
+            {{ num }}
+        </li>
+    </ul>
+
+    <div style="width: 200px;background: #CBE923;clear: left;float: left">
+        <!--display: inline-block;clear: left;-->
+        <input v-model="input_content" placeholder="请输入:">
+        <p>Message is: {{ input_content }}</p>
+    </div>
+
+    <div style="float: left;display: inline-block;width: 300px;background: #f2f2f0;margin-left: 30px">
+        <span>Multiline message is:</span>
+
+        <p style="white-space: pre-line;">{{ multy_message }}</p>
+        <br>
+        <textarea v-model="multy_message" placeholder="add multiple lines"></textarea>
+
+    </div>
+
+</div>
+
+
+</body>
+<script>
+    var example1 = new Vue({
+        el: '#example-1',
+        data: {
+            items: [
+                {message: 'Foo'},
+                {message: 'Bar'}
+            ],
+            parentMsg: 'parent_msg'
+        }
+    });
+
+    var example2 = new Vue({
+        el: '#example-2',
+        data: {
+            object:
+                {
+                    name: 'waden',
+                    age: '22',
+                    gender: 'man',
+                    class: 'primery'
+                }
+            ,
+            parentMsg: 'asdf',
+            numbers: [1, 2, 3, 4, 5, 6, 7, 8],
+            items: [
+                {msg: '今天你好吗', time: '2019-04-02 11:21:34'},
+                {msg: 'hello', time: '2019-04-02 11:22:08'},
+                {msg: 'come', time: '2019-04-02 11:24:12'},
+
+
+            ],
+            input_content: '',
+            multy_message: ''
+        },
+        computed: {
+            // 视图上只显示指定的元素
+            evenNumbers: function () {
+                return this.numbers.filter(function (number) {
+                    return number % 2 === 0
+                })
+            }
+        }
+    });
+
+</script>
+
+<script>
+
+    setTimeout(function () {
+        // 对象内部变量直接更改能触发试图刷新, 数组内部元素变化, 需要用 Vue.set全局方法才能触发视图刷新
+        example1.parentMsg = "替换";
+        example2.object.id = '123';
+        // 动态更改list 数组的元素
+        // Vue.set(list, indexOfItem , newValue);
+        // 动态设置对象的属性值
+        Vue.set(example2.object, 'code', "ASDD");
+        // 强制刷新
+        // example2.$forceUpdate();
+        // 冬天给对象添加多属性
+        example2.object = Object.assign({}, example2.object, {
+            skinColor: 'yellow',
+            favoriteColor: 'Vue Green'
+        })
+
+    }, 1000)
+
+
+</script>
+
+</html>

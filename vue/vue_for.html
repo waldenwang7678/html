@@ -49,32 +49,33 @@
             {{index}}.{{key}} : {{value}}
         </li>
     </ul>
-    <ul style="clear: left">
-        <li v-for="n in evenNumbers">{{ n }}</li>
-    </ul>
+    <div style="clear: left;float: left;background: #46F3B6">
+        <ul style="margin-left: -40px;margin-right: 20px">
+            <li v-for="n in evenNumbers" style="float: left;margin-left: 10px">{{n}}</li>
+        </ul>
+    </div>
 
-    <div>
+    <div style="width: 40%;float: left;background: #ff8400">
         <span style="margin-left: 10px;background: #CBE923" v-for="n in 10">{{ n }} </span>
     </div>
 
-    <br/>
-    <span> v-for on a &lt;template&gt; </span>
-    <ul>
-        <template v-for="item in items">
-            <li>消息: {{item.time}} : {{ item.msg }}</li>
-            <li class="divider" role="presentation"></li>
-        </template>
-    </ul>
+    <div style="display: inline-block;float: left;background: #ceffc2">
+        <span> v-for on a &lt;template&gt; </span>
+        <ul>
+            <template v-for="item in items">
+                <li>消息: {{item.time}} : {{ item.msg }}</li>
+                <li class="divider" role="presentation"></li>
+            </template>
+        </ul>
+    </div>
 
-    <ul>
+    <ul style="clear: left">
         <!--v-if 可以添加 js条件语句-->
         <li v-for="num in numbers" v-if="num > 3" style="float: left; margin-left: 10px">
             {{ num }}
         </li>
     </ul>
-
     <div style="width: 200px;background: #CBE923;clear: left;float: left">
-        <!--display: inline-block;clear: left;-->
         <input v-model="input_content" placeholder="请输入:">
         <p>Message is: {{ input_content }}</p>
     </div>
@@ -86,6 +87,60 @@
         <br>
         <textarea v-model="multy_message" placeholder="add multiple lines"></textarea>
 
+    </div>
+
+    <div style="clear: left">
+        <input type="checkbox" id="checkbox" v-model="checked">
+        <label for="checkbox">{{ checked }}</label>
+    </div>
+
+</div>
+
+<div id='example-3' style="background: pink">
+    <!--多选-->
+    <div style="float: left;width: 200px;background: orange">
+        <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="John" v-model="checkedNames">
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+        <label for="mike">Mike</label>
+        <br>
+        <span>Checked names: {{ checkedNames }}</span>
+    </div>
+
+    <!--单选-->
+    <div style="float: left;background: #d9e0ee;margin-left: 20px;">
+        <input type="radio" id="one" value="One" v-model="picked">
+        <label for="one">One</label>
+        <br>
+        <input type="radio" id="two" value="Two" v-model="picked">
+        <label for="two">Two</label>
+        <br>
+        <span>Picked: {{ picked }}</span>
+    </div>
+
+    <div style="background: #46F3B6;float: left;margin-left: 20px">
+        <select v-model="selected_single">
+            <option disabled value="">请选择</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        <span style="display: block;margin-top: 10px">Selected: {{ selected_single }}</span>
+    </div>
+
+    <div style="float: left;margin-left: 20px">
+        <select v-model="selected_multy" multiple style="width: 50px;">
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+            <option>D</option>
+            <option>E</option>
+            <option>F</option>
+        </select>
+        <br>
+        <span>Selected: {{ selected_multy }}</span>
     </div>
 
 </div>
@@ -125,7 +180,8 @@
 
             ],
             input_content: '',
-            multy_message: ''
+            multy_message: '默认值',
+            checked: true,
         },
         computed: {
             // 视图上只显示指定的元素
@@ -136,6 +192,17 @@
             }
         }
     });
+
+    var vm_3 = new Vue({
+        el: '#example-3',
+        data: {
+            checkedNames: [],
+            picked: 'One',
+            selected_single: 'B',
+            selected_multy: ['A','C','F']
+
+        }
+    })
 
 </script>
 

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="../js/vue.min.js"></script>
+    <script src="component_module.js"></script>
+
+    <script>
+    </script>
+</head>
+<body>
+<div id="components-demo">
+    <button-counter></button-counter>
+
+    <blog-post title="ad" time="2019-04-01" post=""></blog-post>
+    <blog-post title="ade" time="2019-04-02" post=""></blog-post>
+
+    <div :style="{ fontSize: postFontSize + 'px' }">
+        <!--$event 是组件中 $emit('enlarge-text' , 0.2) 传出来的0.2-->
+        <!-- v-on:enlarge-text  后的字符会被解析成js代码执行-->
+
+
+        <!--v-on:enlarge-text="postFontSize += $event"-->
+        <!--v-on:enlarge-text="onEnlargeText"-->
+
+        <!-- 如果 v-on 后面传入的是一个函数, 那么, $event 会作为函数的第一个参数传入-->
+        <blog-post
+                v-for="post in posts"
+                v-bind:time="post.time"
+                v-bind:title="post.title"
+                v-on:enlarge-text="postFontSize += $event"
+                v-bind:post="post.post">
+        </blog-post>
+    </div>
+
+    <script>
+        var vm1 = new Vue({
+            el: '#components-demo',
+            data: {
+                posts: [
+                    {title: 'My journey with Vue', time: '2019-11-12', post: {content: '今天有个云123', desc: '描述1'}},
+                    {title: 'Blogging with Vue', time: '2019-1-22', post: {content: '今天有个云1234', desc: '描述2'}},
+                    {title: 'Why Vue is so fun', time: '2019-06-30', post: {content: '今天有个云12345', desc: '描述3'}}
+                ],
+                postFontSize: 16,
+                methods: {
+                    onEnlargeText: function (enlargeAmount) {
+                        this.postFontSize += enlargeAmount
+                    }
+                }
+            }
+        });
+
+    </script>
+</div>
+</body>
+</html>

@@ -7,8 +7,6 @@
     <script src="../js/vue.min.js"></script>
     <script src="component_module.js"></script>
 
-    <script>
-    </script>
 </head>
 <body>
 <div id="components-demo">
@@ -30,7 +28,7 @@
                 v-for="post in posts"
                 v-bind:time="post.time"
                 v-bind:title="post.title"
-                v-on:enlarge-text="postFontSize += $event"
+                v-on:enlarge-text="onEnlargeText"
                 v-bind:post="post.post">
         </blog-post>
     </div>
@@ -45,10 +43,11 @@
                     {title: 'Why Vue is so fun', time: '2019-06-30', post: {content: '今天有个云12345', desc: '描述3'}}
                 ],
                 postFontSize: 16,
-                methods: {
-                    onEnlargeText: function (enlargeAmount) {
-                        this.postFontSize += enlargeAmount
-                    }
+
+            },
+            methods: {
+                onEnlargeText: function (enlargeAmount) {
+                    this.postFontSize += enlargeAmount
                 }
             }
         });

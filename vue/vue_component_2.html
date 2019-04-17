@@ -2,24 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920,height=1200,maximum-scale=1.0, user-scalable=no">
     <title>组件test</title>
 
     <script src="../js/vue.min.js"></script>
     <script src="w_component.js"></script>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+
 
 </head>
 <body>
 
-<div style="">
-    <div>
+<div class="root_layout" style="">
+    <div style="height: 80px;width: 100%;background: palegoldenrod;">
         <p>
-            添加备注
-
+            添加备注{{remarkContent}}
         </p>
     </div>
 
+    <div style="text-align: center;height: 100px; width:400px; margin-top: 100px;background: pink;line-height: 100px">
 
+        <input onclick="showEdit()" type="button" value="编辑" style="width: 100px;height: 30px;background: #ceffc2">
+
+    </div>
+
+    <div>
+
+        <float-edit-text
+                v-show="show"
+                :title="inputTitle"
+                :content="remarkContent"
+                v-bind:holder="holder"
+                v-on:set-text-content="saveText"
+                v-on:close-page="closePage">
+        </float-edit-text>
+    </div>
 </div>
+
+<script>
+    function showEdit() {
+        console.log('打开编辑');
+        vm.show = !vm.show;
+    }
+
+    var vm = new Vue({
+            el: '.root_layout',
+            data: {
+                holder: '今天有个云123',
+                postFontSize: 16,
+                show: false,
+                remarkContent: '今天你好吗',
+                inputTitle: '添加其他物品'
+            },
+            methods:
+                {
+                    saveText: function (enlargeAmount) {
+                        console.log(enlargeAmount);
+                        this.remarkContent = enlargeAmount;
+                    }
+                    ,
+                    closePage: function () {
+                        vm.show = false;
+
+
+                    }
+                }
+        })
+    ;
+
+
+</script>
 
 </body>
 </html>

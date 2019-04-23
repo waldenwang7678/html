@@ -59,8 +59,8 @@ Vue.component('float-edit-text', {
             this.$emit('close-page')
         },
         saveText: function () {
-            this.closePage();
             this.$emit('set-text-content', this.content)
+            this.closePage();
         },
     },
     watch: {

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片轮播--透明度</title>
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #banel{
+            width:600px;
+            height:auto;
+            position:relative;
+            margin: auto;
+            padding:5px;
+        }
+        .box{
+            position:absolute;
+            width:600px;
+            height:auto;
+            border:solid 1px #888;
+            border-radius:5px;
+            overflow:hidden;
+            display:none;
+        }
+        .box:nth-of-type(1) {
+            display: block;
+        }
+        .box > img{
+            /*left-center-right  top-middle-bottom*/
+            vertical-align: middle;
+            width:600px;
+            height:auto;
+        }
+
+    </style>
+</head>
+<body>
+<div id="banel">
+    <div class="box"><img src="../../../img/cc.jpg" alt=""></div>
+    <div class="box"><img src="../../../img/aaa.jpeg" alt=""></div>
+</div>
+<script>
+    $(function() {
+        // 开始开发透明度轮播操作
+        // 定义变量，表示当前图片下标
+        var _current = 0;
+        // 获取当前操作的图片
+        var $imgs = $(".box");
+
+        // 定义计时函数，完成定时切换
+        setInterval(function() {
+            // 当前图片隐藏
+
+            var _img = $imgs.get(_current);
+            $(_img).fadeOut(1000);
+
+            // 下一张图片显示
+            var _next = _current + 1;
+            if(_next >= $imgs.size()){
+                _next = 0;
+            }
+            var _nextimg = $imgs.get(_next);
+            $(_nextimg).fadeIn(1000);
+
+            _current ++;
+            if(_current >= $imgs.size()) {
+                _current = 0;
+            }
+
+        }, 2000)
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="../../js/minirefresh.min.css"/>
+    <script type="text/javascript" src="../../js/minirefresh.min.js"></script>
+
+
+    <style>
+
+        li {
+            font-size: 24px;
+        }
+
+        /* 主视图盒子 */
+        .mainContainer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            padding: 0 50px;
+        }
+
+    </style>
+</head>
+<body>
+<div style="display: flex">
+
+<!-- minirefresh开头的class请勿修改 -->
+<div id="minirefresh" class="minirefresh-wrap">
+    <div class="minirefresh-scroll">
+        <div class="mainContainer" >
+
+        <ul>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+            <li> 大法师 大法师 大法师 大法师 大法法师</li>
+        </ul>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<script>
+
+
+
+
+
+    // 引入任何一个主题后，都会有一个 MiniRefresh 全局变量
+    let miniRefresh = new MiniRefresh({
+        container: '#minirefresh',
+        down: {
+            callback: function () {
+                // 下拉事件
+                console.log('下拉');
+
+                // 结束下拉刷新
+                // miniRefresh.endDownLoading();
+                setTimeout(function () {
+                    miniRefresh.endDownLoading();
+                }, 1000);
+            }
+        },
+        up: {
+            isLock:true,
+            callback: function () {
+                // 上拉事件
+                console.log('上拉');
+                // 结束上拉加载
+                // 参数为true代表没有更多数据，否则接下来可以继续加载
+
+                miniRefresh.endUpLoading(false);
+            }
+        }
+    });
+
+    miniRefresh.endDownLoading();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<!--回车, 空格 不转义 : pre-->
+<!--html , js , xml 不转义 : xmp -->
+<div>
+
+    <p style="max-width: 1000px;color: red">
+        同步和异步任务分别进入不同的执行"场所"，同步的进入主线程，异步的进入Event Table并注册函数。
+        当指定的事情完成时，Event Table会将这个函数移入Event Queue。主线程内的任务执行完毕为空，
+        会去Event Queue读取对应的函数，进入主线程执行。上述过程会不断重复，也就是常说的Event Loop(事件循环)。
+    <pre>
+        异步:
+        Event Table : 注册函数
+        Event Queue : 函数入队
+        Event Loop :  主线程执行完毕后进入 Event Queue 读取函数, 再进入主线程执行, 事件循环
+        </pre>
+
+    </p>
+
+    <pre style="display: inline-block">  </pre>
+    <span style="color: rebeccapurple;font-size: 30px">
+        三个宏任务，一个微任务，两次打印。
+    </span>
+
+    <div id="ddd" style="height: 200px;width: 200px;background: #cccccc"></div>
+</div>
+<div>
+    <xmp style="font-size: 30px;align-items: center">
+        // 宏任务
+        console.log('sync1');
+        // 宏任务队列
+        setTimeout(function () {
+        console.log('setTimeout1')
+        }, 0);
+
+        var promise = new Promise(function (resolve, reject) {
+        // 宏任务队列
+        setTimeout(function () {
+        console.log('setTimeoutPromise')
+        }, 0);
+        // 宏任务
+        console.log('promise');
+        resolve();
+        });
+
+        // 微任务队列
+        promise.then(() => {
+        console.log('pro_then');
+        // 微任务队列-> 宏任务队列 , 最后执行
+        setTimeout(() => {
+        console.log('pro_timeout');
+        }, 0)
+        })
+        // 宏任务队列
+        setTimeout(function () {
+        console.log('last_setTimeout')
+        }, 0);
+        // 宏任务
+        console.log('sync2');
+
+        // 宏任务队列
+        setTimeout(function(){
+        console.log('1')
+        });
+
+        new Promise(function(resolve){
+        // 宏任务
+        console.log('2');
+        resolve();
+        }).then(function(){
+        // 微任务队列
+        console.log('3')
+        });
+        // 宏任务
+        console.log('4');
+    </xmp>
+</div>
+
+
+<script>
+    // 宏任务, 微任务
+    let async = 0;
+    let enumer = 1;
+
+    let a = function () {
+        console.log('sync1');
+
+        setTimeout(function () {
+            console.log('setTimeout1')
+        }, 0);
+
+        let promise = new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                console.log('setTimeoutPromise')
+            }, 0);
+            console.log('promise');
+            resolve();
+
+        }).then(function () {
+
+        }).catch(function () {
+
+        });
+
+
+        promise.then(() => {
+            console.log('pro_then');
+            setTimeout(() => {
+                console.log('pro_timeout');
+            }, 0)
+        });
+
+        setTimeout(function () {
+            console.log('last_setTimeout')
+        }, 0);
+        console.log('sync2');
+
+
+        setTimeout(function () {
+            // 宏任务队列
+            console.log('1')
+        });
+        new Promise(function (resolve) {
+            // 同步执行
+            console.log('2');
+            resolve();
+        }).then(function () {
+            console.log('3')
+        });
+
+        console.log('4');
+    };
+    if (async === 1) {
+        a();
+    }
+
+    if (enumer === 1) {
+        let o = {a: 10, b: 20};
+        Object.defineProperty(o, "c", {enumerable: false, value: 30});
+
+        for (let p in o) {
+            console.log(p);
+        }
+    }
+
+
+    function sleep(duration) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(resolve, duration);
+        })
+    }
+
+    async function* foo() {
+        i = 0;
+        while (true) {
+            await sleep(1000);
+            yield i++;
+        }
+
+    }
+
+    // for await(let e of foo()) {
+    //     console.log(e);
+    // }
+
+    var num = [4, 9, 16, 25];
+
+    function myFunction() {
+        x = document.getElementById("ddd");
+        x.innerHTML = num.map(Math.sqrt);
+    }
+
+    myFunction();
+
+
+    var arr = [
+        {
+            name: 'asd', id: 'SDE111111', status: false,
+        },
+        {
+            name: 'asd', id: 'SDE12222', status: true,
+        },
+        {
+            name: 'asd', id: 'SDE133333', status: false,
+        },
+
+    ];
+    var arrNew = [];
+    arrNew = arr.filter(function (value, index, arr) {
+        console.log('当前值：' + value);
+        console.log('当前值对应的索引：' + index);
+        console.log('原数组：' + arr);
+        return value.status;
+    });
+    //map返回新数组
+    console.log(arrNew);
+    arrNew[0].status = false;
+
+    console.log(arr);
+
+
+</script>
+</body>
+</html>

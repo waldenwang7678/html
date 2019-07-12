@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>snow</title>
+    <style>
+        img {
+            width: 100px;
+        }
+
+        body {
+            background: #ceffc2;
+        }
+    </style>
+
+</head>
+<body>
+    <img src="../../img/aaa.jpeg" alt="" style="" onclick="asd1()">
+
+    <div onclick="asd()" style="height: 200px;width: 300px;background: pink"></div>
+</body>
+
+<script>
+
+    function asd() {
+        alert('div')
+    }
+
+    function asd1() {
+        alert('img')
+    }
+
+
+    // let o = {
+    //    // handleEvent: event => console.log(event);
+    //     alert('img');
+    // };
+
+    function o(event) {
+        alert('body');
+        // event.preventDefault();
+        // 阻值冒泡 ,
+        event.stopPropagation();
+    }
+
+    // document.body.addEventListener("mouchdown", o, true);
+    // false:冒泡 , true:捕获
+    document.getElementsByTagName('body')[0].addEventListener("click", o, true)
+
+
+    /*
+      let body = document.getElementsByTagName('body')[0];
+      body.innerHTML = body.innerHTML.replace(/<img([^<>]*)>/gi, '<embed $1>');
+      // console.log("body.innerHTML : " + body.innerHTML);
+
+      body.innerHTML = body.innerHTML.replace('aaa.jpeg', 'cc.jpg');
+      let embedTag = document.getElementsByTagName("embed");
+      // embedTag.removeAttribute("style");
+
+
+      // console.log(embedTag);
+      // embedTag .removeAttribute("style");
+      let flag = false;
+      if (flag) {
+          for (let i = 0; i < embedTag.length; i++) {
+              embedTag[i].style.height = '70px';
+              embedTag[i].style.width = '70px';
+          }
+      } else {
+          for (let j in embedTag) {
+
+              console.log('J : ' + j);
+
+              embedTag[j].style.height = '70px';
+              embedTag[j].style.width = '70px';
+          }
+
+      }*/
+
+
+    /* var body = document.getElementsByTagName('body')[0];
+     body.innerHTML = body.innerHTML.replace(/<img([^<>]*)>/gi, '<embed $1>');
+     var embedTag= document.getElementsByTagName("embed");
+     for(var i = 0; i < embedTag.length; i++){
+         embedTag[i].style.width='300mm';
+     }*/
+
+
+
+
+
+
+
+    // let embedTag = document.getElementsByTagName('embed');
+    //
+    // if(embedTag==null){
+    //     console.log('null');
+    // }else{
+    //     console.log('not null len: ' + embedTag.length);
+    // }
+    // for(let item in embedTag ){
+    //     // item.style.width = "0";
+    //     // item.style.height = "0";
+    //
+    //     // item.setAttribute('style', 'height: 1000px ');
+    //     // item.setAttribute('style', 'width: 1000px ');
+    //
+    // }
+
+    // // 在原有样式操作
+    // document.styleSheets[0].addRule('embed', 'height: 1000px');
+    // document.styleSheets[0].addRule('embed', 'width: 1000px');
+    // // document.styleSheets[0].insertRule('.box {height: 100px}', 0);
+    //
+    // // 或者插入新样式时操作
+    // var styleEl = document.createElement('style'),
+    //     styleSheet = styleEl.sheet;
+    //
+    // styleSheet.addRule('.box', 'height: 100px');
+    // styleSheet.insertRule('.box {height: 100px}', 0);
+    //
+    // document.head.appendChild(styleEl);
+</script>
+</html>

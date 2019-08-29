@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>webSocket</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/sockjs/1.0.0/sockjs.min.js"></script>
+    <script src="https://cdn.bootcss.com/blueimp-md5/2.11.1/js/md5.min.js"></script>
+    <!--<script src="https://cdn.bootcss.com/blueimp-md5/2.11.0/js/md5.js"></script>-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+    <!--<script type="text/javascript" src="https://unpkg.com/vue"></script>-->
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+
+
+    <style>
+        button {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        #text_chat_content {
+            padding: 8px;
+            width: 400px;
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .commonBt {
+            width: 60px;
+            height: 25px;
+            border: 1px solid #eeeeee;
+            border-radius: 6px;
+            color: #00bcbc;
+        }
+
+        .commonLightBt {
+            width: 60px;
+            height: 25px;
+            border: 1px solid #eeeeee;
+            border-radius: 6px;
+            color: #999999;
+        }
+
+        #friend_item {
+            width: 100%;
+            height: 26px;
+            /*background: #00bcbc;*/
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            border: 1px solid #eeeeee;
+            /*border-radius: 5px;*/
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="wrapper_content" style="padding:30px">
+    <div>
+        <span>message content：</span>
+    </div>
+
+    <div style="display: flex;margin-top: 20px">
+        <div>
+            <div id="text_chat_content"></div>
+        </div>
+        <div style="margin-left: 10px;margin-top: 100px">
+            <div style="display: flex;flex-direction: column">
+                <div style="display: flex">
+                    <span style="margin-right: 10px">username :</span>
+                    <input id="username" type="text"/>
+                </div>
+                <div style="display: flex ;margin-top: 6px">
+                    <span style="margin-right: 10px">password :</span>
+                    <input id="password" type="password"/>
+                </div>
+
+
+                <div style="margin-top: 10px">
+                    <button class="commonBt" id="bt_join">join in</button>
+                </div>
+                <div style="margin-top: 10px">
+                    <button class="commonLightBt" id="bt_left">left</button>
+                </div>
+            </div>
+            <div style="margin-top: 80px">
+                <button id="clear_content" class="commonBt">clear</button>
+            </div>
+        </div>
+
+        <div style="width: 140px;height: 300px;margin-left: 10px">
+            <div> user:</div>
+            <div id="friend_item" v-for="item in dataList">
+                <span>{{item}}</span>
+            </div>
+        </div>
+    </div>
+    <div style="display: flex;margin-top: 10px">
+        <input id="in_msg" type="text" style="width: 200px"/>
+        <button id="bt_send" style="color: #00bcbc;">send</button>
+    </div>
+</div>
+</body>
+
+<script>
+    let vm = new Vue({
+        el: ".wrapper_content",
+        data: {
+            dataList: [],
+        },
+        mounted: function () {
+
+            console.log('sdf')
+        },
+        methods: {}
+    });
+
+    function concat(component, text) {
+        let content = component.html();
+        component.html(content + text + "<br>");
+    }
+
+    $(document).ready(function () {
+        let urlPrefix = "ws://localhost:11111/chat-room/";
+        let ws = null;
+        //加入聊天室
+        $('#bt_join').click(function () {
+            let username = $('#username').val();
+            let password = $('#password').val();
+            if (username == null || username == '' || password == null || password == '') {
+                alert('账号或者密码为空');
+                return;
+            }
+            password = md5(password);
+            console.log('username: ' + username + '__password:' + password);
+            if (ws) {
+                ws.close();
+            }
+            //这一步，会调用服务端的@OnOpen注解标注的方法
+
+            ws = new WebSocket(urlPrefix + username + '/' + password);
+
+            ws.onmessage = function (event) {
+                if (event == null) {
+                    return;
+                }
+                let msg = event.data;
+                if (msg.indexOf('friend') == 0) {
+                    let str = msg.split('_')[1];
+                    console.log('str: ' + str);
+                    vm.dataList = JSON.parse(str);
+                    return;
+                }
+                console.log('msg: ' + msg);
+                if (msg == '100100') {
+                    alert('账号或密码为空');
+                    return;
+                } else if (msg == '100101') {
+                    alert('已经登录');
+                    return;
+                } else if (msg == '100102') {
+                    alert('密码错误');
+                    return;
+                }
+                concat($('#text_chat_content'), event.data);
+                // 发送完之后清空
+                $('#in_msg').val("");
+
+            };
+            ws.onopen = function () {
+                console.log('onopen');
+                $('#bt_join').attr('disabled', true);
+            };
+            ws.onerror = function () {
+                console.log('onerror');
+            };
+            ws.onclose = function () {
+                console.log('onclose');
+                $('#bt_join').attr('disabled', false);
+                /**
+                 * 问题：为什么这里不是接收服务端的提示信息，而是当前用户自己定义消息？
+                 * 原因：当用户离开聊天室时，在遍历存活用户时，当前用户已经不在存活用户集合中，
+                 *       所以当前用户的提示信息不能由服务端发送，而得由自己去定义！
+                 */
+                concat($('#text_chat_content'), "<span style='color: #00bcbc'>" + username + "</span>" + " 离开！");
+            };
+        });
+        //发送消息
+        $('#bt_send').click(function () {
+            if (ws) {
+                ws.send($('#in_msg').val());
+            }
+        });
+
+        //离开
+        $('#bt_left').click(function () {
+            if (ws) {
+                ws.close();
+            }
+        });
+
+        //清空
+        $('#clear_content').click(function () {
+            $('#text_chat_content').html('');
+        });
+    });
+
+
+</script>
+</html>

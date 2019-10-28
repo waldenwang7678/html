@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.2/lib/index.css">
+
+  <!-- 引入 Vue 和 Vant 的 JS 文件 -->
+<!--  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>-->
+  <script src="../js/vue.min.js"></script>
+<!--  <script src="https://cdn.jsdelivr.net/npm/vant@2.2/lib/vant.min.js"></script>-->
+  <script src="../js/vant_min.js"></script>
+
+
+</head>
+<body>
+
+
+<div id="app">
+
+</div>
+
+<script>
+
+
+    // import Vue from 'vue';
+    // import { Uploader } from 'vant';
+    // Vue.use(Uploader);
+
+    // 在 #app 标签下渲染一个按钮组件
+    new Vue({
+        el: '#app',
+        template:
+            `<div @click="showAll()">
+                <div>
+                    <van-button  @click="bt1($event)" id="bt1">按钮1</van-button>
+                    <van-button  @click="bt2($event)">按钮2</van-button>
+                </div>
+
+                <div style="margin-top: 100px"  v-show="isShow">
+                  <van-uploader :after-read="afterRead" />
+                  <van-uploader v-model="fileList" multiple />
+                </div>
+                <div>
+                    <van-uploader v-model="fileList"  multiple  :max-count="3" />
+                </div>
+            </div>`,
+        data() {
+            return {
+                isShow: true,
+                fileList: [
+                    {url: 'https://img.yzcdn.cn/vant/leaf.jpg'},
+                    // Uploader 根据文件后缀来判断是否为图片文件
+                    // 如果图片 URL 中不包含类型信息，可以添加 isImage 标记来声明
+                    {url: 'https://cloud-image', isImage: true}
+                ]
+            }
+        },
+        mounted: function () {
+            let bt1 = document.getElementById("bt1");
+            // 捕获事件
+            bt1.addEventListener("click", function (event) {
+                console.log('bt1_catch');
+                event.preventDefault();
+                return true;
+            }, true);
+            // 冒泡事件
+            bt1.addEventListener("click", function (event) {
+                console.log('bt1_pop');
+                //  阻止冒泡
+                event.cancelBubble = true;
+                event.stopPropagation();
+            })
+
+        },
+        methods: {
+            toast: function () {
+                // 调用函数组件，弹出一个 Toast
+                vant.Toast('提示');
+            },
+
+            showAll: function () {
+                this.isShow = true;
+                console.log('showAll');
+            },
+            bt1: function (event) {
+                console.log('bt1_click');
+                this.toast();
+                // 阻止事件冒泡
+                // event.cancelBubble = true;
+                // event.stopPropagation();
+            },
+            bt2: function (event) {
+                this.isShow = !this.isShow;
+                // 阻止事件冒泡
+                event.cancelBubble = true;
+            },
+            afterRead(file) {
+                // 此时可以自行将文件上传至服务器
+                console.log(file);
+            }
+        }
+    });
+
+
+</script>
+
+</body>
+</html>

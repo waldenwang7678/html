@@ -2,12 +2,364 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920,height=1200,maximum-scale=1.0, user-scalable=no">
+
     <title>Title</title>
 
+    <script src="../js/vue.min.js"></script>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/css_use.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
 
+        .root_layout {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title_layout {
+            width: 100%;
+            height: 90px;
+            /*box-shadow: 0 4px 8px 0 #cccccc;*/
+        }
+
+        .title_back {
+            width: 90px;
+            height: 90px;
+        }
+
+        .title_name {
+            color: black;
+            font-size: 32px;
+        }
+
+        .title_done {
+            color: #00bebe;
+            font-size: 32px;
+        }
+
+        .title_done_layout {
+            width: fit-content;
+            height: 90px;
+            padding-right: 50px;
+            padding-left: 50px;
+        }
+
+        .flag_root {
+            width: 100%;
+            height: 120px;
+        }
+
+        .flag_item {
+            width: 240px;
+            height: 80px;
+            border-radius: 42px;
+        }
+
+        .flag_item_normal {
+            background: rgba(255, 255, 255, 1);
+            border: 1px solid rgba(205, 206, 212, 1);
+        }
+
+        .flag_item_light {
+            background: #00bebe;
+        }
+
+        .flag_item span {
+            height: 42px;
+            font-size: 30px;
+            font-weight: 400;
+            line-height: 42px;
+        }
+
+        .flag_item_normal span {
+            color: rgba(105, 109, 127, 1);
+        }
+
+        .flag_item_light span {
+            color: white;
+        }
+
+
+        .img_tag_layout {
+            width: 100%;
+            /* vh Viewport高度， 1vh 等于viewport高的的1% */
+            height: calc(100vh - 210px);
+            background: #66bebe;
+            /*margin-top: 10px;*/
+        }
+
+        .img_tag_layout img {
+            height: 100%;
+        }
+
+        .delete_text {
+            height: 42px;
+            font-size: 30px;
+            font-weight: 400;
+            color: rgba(254, 37, 29, 1);
+            line-height: 42px;
+            margin-left: 10px;
+        }
+
+        .delete_layout {
+            width: 1920px;
+            height: 120px;
+            background: linear-gradient(180deg, rgba(254, 37, 29, 0.14) 0%, rgba(254, 37, 29, 0.06) 100%);
+        }
+    </style>
 
 </head>
-<body>
 
+
+<body>
+<div class="root_layout" id="wrapper">
+
+    <!--标题-->
+    <div class="flex_between title_layout">
+        <div class="title_back flex_center" style="" @click="back()">
+            <img src="../img/guanbi@3x.png " alt="" style="width: 40px"/>
+        </div>
+        <span class="title_name">请添加标签</span>
+
+        <div style="" class="title_done_layout flex_center" @click="finish()">
+            <span class="title_done"> 完成</span>
+        </div>
+    </div>
+
+    <!--图片-->
+    <div class="img_tag_layout " id="img_tag_root" style="position: relative">
+        <img src="../img/aaa.jpeg " alt="">
+        <span id="text_Show" style="font-size: 32px; width:500px; position: absolute;top: 0;right: 0 ">text </span>
+
+    </div>
+
+    <!-- 底部tag-->
+    <div class="flag_root flex_evenly" v-if="!showDeleteView">
+        <div class="flag_item flex_center" v-for="(flagItem,index) in flagList"
+             @click="clickFlag(flagItem,index)" :class="[flagItem.check?'flag_item_light':'flag_item_normal']">
+            <span>{{flagItem.name}} </span>
+        </div>
+    </div>
+
+    <div class="flag_root flex_center delete_layout" v-if="showDeleteView">
+        <div class="flex_center">
+            <img src="../img/shanchu@3x.png" alt="" style="width: 32px;height: 42px">
+            <span class="delete_text"> 拖到这里删除</span>
+        </div>
+    </div>
+</div>
 </body>
+
+<script>
+
+    let v2 = new Vue({
+        el: '#wrapper',
+        data: {
+            imgTagData: [],
+
+            flagList: [
+                {name: '凹痕', code: '001', check: false},
+                {name: '掉漆', code: '002', check: false},
+                {name: '划痕', code: '003', check: false},
+                {name: '裂痕', code: '004', check: false},
+                {name: '破损', code: '005', check: false},
+                {name: '锈蚀', code: '006', check: false}
+            ],
+            showDeleteView: false,      // 是否显示删除view
+            currentCheckItem: null, // 页面下方一排标签中,选中的某一个标签
+            idMove: false,          //
+            selectedTagItem: '',   // 当前选中的标签
+            isTagTouched: false,   // 已经贴上去的标签是否被摁住
+        },
+        mounted: function () {
+            this.initView()
+
+        },
+        methods: {
+            initView: function () {
+                // false , 冒泡事件
+                let rootView = document.getElementById("img_tag_root");
+                rootView.addEventListener('touchstart', this.touch, false);
+                rootView.addEventListener('touchmove', this.touch, false);
+                rootView.addEventListener('touchend', this.touch, false);
+            },
+            touch: function (event) {
+
+                event = event || window.event;
+                let oInp = document.getElementById("text_Show");
+                let target = event.target;
+
+                //touches: 当前屏幕上所有触摸点的列表;
+                // targetTouches: 当前对象上所有触摸点的列表;
+                // changedTouches: 涉及当前(引发)事件的触摸点的列表
+                //1. 用一个手指接触屏幕，触发事件，此时这三个属性有相同的值。
+                // 2. 用第二个手指接触屏幕，此时，touches有两个元素，每个手指触摸点为一个值。当两个手指触摸相同元素时，
+                // targetTouches和touches的值相同，否则targetTouches 只有一个值。changedTouches此时只有一个值，为第二个手指的触摸点，因为第二个手指是引发事件的原因
+                //3. 用两个手指同时接触屏幕，此时changedTouches有两个值，每一个手指的触摸点都有一个值
+                //4. 手指滑动时，三个值都会发生变化
+                // 5. 一个手指离开屏幕，touches和targetTouches中对应的元素会同时移除，而changedTouches仍然会存在元素。
+                // 6. 手指都离开屏幕之后，touches和targetTouches中将不会再有值，changedTouches还会有一个值，此值为最后一个离开屏幕的手指的接触点。
+                switch (event.type) {
+                    case "touchstart":
+                        let x = event.touches[0].clientX.toFixed(1);
+                        let y = event.touches[0].clientY.toFixed(1);
+
+                        oInp.innerHTML = "Touch started: <br> (" + x + "," + y + ")";
+                        break;
+                    case "touchmove":
+                        let x1 = event.touches[0].clientX.toFixed(1);
+                        let y1 = event.touches[0].clientY.toFixed(1);
+                        this.idMove = true;
+                        // event.preventDefault();
+                        oInp.innerHTML = "Touch moved: <br>(" + x1 + "," + y1 + ")";
+                        break;
+                    case "touchend":
+                        let x2 = event.changedTouches[0].clientX.toFixed(1);
+                        let y2 = event.changedTouches[0].clientY.toFixed(1);
+                        oInp.innerHTML = "Touch end : <br>(" + x2 + "," + y2 + ")";
+                        if (this.idMove) {
+                            // 移动后松开
+
+                        } else {
+                            // 点击 touchEnd
+                            if (this.currentCheckItem == null) {
+                                return;
+                            } else {
+                                let x = event.changedTouches[0].clientX.toFixed(1);
+                                let y = event.changedTouches[0].clientY.toFixed(1);
+                                this.currentCheckItem.x = x;
+                                this.currentCheckItem.y = y;
+                                this.currentCheckItem.id = "tag_" + new Date().getTime();
+                                this.addTag(this.currentCheckItem);
+                                // 保存每次添加 tag 对应的数据
+                                this.imgTagData.push(JSON.parse(JSON.stringify(this.currentCheckItem)));
+                            }
+                        }
+                        this.idMove = false;
+                        break;
+
+                }
+            },
+            addTag: function (item) {
+                // 图片&标签 的父布局
+                let rootView = document.getElementById("img_tag_root");
+                let newElement = document.createElement('div');
+                newElement.innerHTML = this.createNewTag(item.name);
+                let element = $(newElement);
+                element.css({'position': 'absolute', 'left': item.x + 'px', 'top': (item.y - 90) + 'px'});
+                element.attr('id', item.id);
+                rootView.appendChild(newElement);
+                this.addTagMoveEvent(newElement, rootView);
+
+            },
+            //  给标签添加触摸事件
+            addTagMoveEvent: function (element, rootView) {
+                element.addEventListener('touchstart', this.tagTouch(element, rootView), false);
+                element.addEventListener('touchmove', this.tagTouch(element, rootView), false);
+                element.addEventListener('touchend', this.tagTouch(element, rootView), false);
+            },
+            tagTouch: function (element, rootView) {
+                let _this = this;
+                return function (event) {
+                    event = event || window.event;
+                    // 点击标签时, 阻止事件向父级传递, 防止再次生成新的标签
+                    event.cancelBubble = true;
+                    // event.stopPropagation();
+                    // rootView
+                    let rootElement = element.parentNode;
+                    let x = 0;
+                    let y = 0;
+                    switch (event.type) {
+                        case "touchstart":
+                            // this.isTagTouched = true;
+                            // this.showDeleteView = true;
+                            x = event.touches[0].clientX.toFixed(1);
+                            y = event.touches[0].clientY.toFixed(1);
+                            // 将标签置顶
+
+                            break;
+                        case "touchmove":
+
+                            _this.isTagTouched = true;
+                            _this.showDeleteView = true;
+                            x = event.touches[0].clientX.toFixed(1);
+                            y = event.touches[0].clientY.toFixed(1);
+                            if (x <= 0) {
+                                x = 0;
+                            }
+                            if (x > 1820) {
+                                x = 1820;
+                            }
+                            if (y <= 90) {
+                                y = 90;
+                            }
+                            $(element).css({'position': 'absolute', 'left': (x + 'px'), 'top': (y - 90 + 'px')});
+                            break;
+                        case "touchend":
+                            idMoved = false;
+                            _this.isTagTouched = false;
+                            _this.showDeleteView = false;
+                            x = event.changedTouches[0].clientX.toFixed(1);
+                            y = event.changedTouches[0].clientY.toFixed(1);
+
+                            if (x > 0 && x < 1920 && y > 1080) {
+                                // 移除元素
+                                rootView.removeChild(element);
+                                // 移除数组里的对应的元素
+                                let id = $(element).attr('id');
+                                for (let i = 0; i < _this.imgTagData.length; i++) {
+                                    if (_this.imgTagData[i].id == id) {
+                                        _this.imgTagData.splice(i, 1);
+                                        break;
+                                    }
+                                }
+                            }
+                            break;
+                    }
+                }
+            },
+
+            createNewTag: function (name) {
+                return `<div style="background: #ceffc2">
+                            <span style="font-size: 32px">${name} </span>
+                        </div>`;
+            },
+
+
+            back: function () {
+
+            },
+            finish: function () {
+                console.log('imgTagData: ' + JSON.stringify(this.imgTagData));
+            },
+            clickFlag: function (item, index) {
+                for (let i in this.flagList) {
+                    this.flagList[i].check = false;
+                }
+                item.check = true;
+                Vue.set(this.flagList, index, item);
+                this.currentCheckItem = item;
+
+            },
+
+            clickImage: function (event) {
+                // event.changedTouches[0].clientY - event.target.offsetTop + scrtop - 550;
+            }
+        },
+        computed: {},
+        watch: {},
+    });
+
+
+</script>
+
+
 </html>

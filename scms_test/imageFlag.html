@@ -182,8 +182,6 @@
     <!--图片-->
     <div class="img_tag_layout " id="img_tag_root" style="position: relative">
         <img src="../img/aaa.jpeg " alt="">
-        <span id="text_Show" style="font-size: 32px; width:500px; position: absolute;top: 0;right: 0 ">text </span>
-
     </div>
 
     <!-- 底部tag-->
@@ -205,7 +203,7 @@
 
 <script>
 
-
+    // todo (0) , 起始滑动时, 会跳动
     // todo (1), 如果两个标签重合，后添加的会覆盖先添加的；点击2个重合标签的后一个，会改变提高点击的那个标签的z-index至最高
     // todo (2), 按住变透明, 变小, [标签scale（1.2），其他标签透明度变为0.8]；松开标签则回到原始大小
     // todo (3), 不论是否添加过标签的照片图片，预览图都正常显示，不显示标签，点击图片进入全屏预览才可查看和再次编辑标签
@@ -244,8 +242,6 @@
             touch: function (event) {
 
                 event = event || window.event;
-                let oInp = document.getElementById("text_Show");
-                let target = event.target;
 
                 //touches: 当前屏幕上所有触摸点的列表;
                 // targetTouches: 当前对象上所有触摸点的列表;
@@ -262,19 +258,16 @@
                         let x = event.touches[0].clientX.toFixed(1);
                         let y = event.touches[0].clientY.toFixed(1);
 
-                        oInp.innerHTML = "Touch started: <br> (" + x + "," + y + ")";
                         break;
                     case "touchmove":
                         let x1 = event.touches[0].clientX.toFixed(1);
                         let y1 = event.touches[0].clientY.toFixed(1);
                         this.idMove = true;
                         // event.preventDefault();
-                        oInp.innerHTML = "Touch moved: <br>(" + x1 + "," + y1 + ")";
                         break;
                     case "touchend":
                         let x2 = event.changedTouches[0].clientX.toFixed(1);
                         let y2 = event.changedTouches[0].clientY.toFixed(1);
-                        oInp.innerHTML = "Touch end : <br>(" + x2 + "," + y2 + ")";
                         if (this.idMove) {
                             // 移动后松开
 

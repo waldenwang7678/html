@@ -159,6 +159,13 @@
             border-radius: 10px;
         }
 
+        .opacity_type {
+            opacity: 0.5;
+        }
+
+        .scale_big_type {
+            transform: scale(1.2);
+        }
     </style>
 
 </head>
@@ -203,8 +210,8 @@
 
 <script>
 
-    // todo (0) , 起始滑动时, 会跳动
-    // todo (1), 如果两个标签重合，后添加的会覆盖先添加的；点击2个重合标签的后一个，会改变提高点击的那个标签的z-index至最高
+    //  (0) , 起始滑动时, 会跳动
+    //  (1), 如果两个标签重合，后添加的会覆盖先添加的；点击2个重合标签的后一个，会改变提高点击的那个标签的z-index至最高
     // todo (2), 按住变透明, 变小, [标签scale（1.2），其他标签透明度变为0.8]；松开标签则回到原始大小
     // todo (3), 不论是否添加过标签的照片图片，预览图都正常显示，不显示标签，点击图片进入全屏预览才可查看和再次编辑标签
     // todo (4)  点击完成, 上传照片
@@ -219,7 +226,7 @@
                 {name: '划痕', code: '003', check: false},
                 {name: '裂痕', code: '004', check: false},
                 {name: '破损', code: '005', check: false},
-                {name: '锈蚀', code: '006', check: false}
+                {name: '锈蚀', code: '006', check: false},
             ],
             showDeleteView: false,      // 是否显示删除view
             currentCheckItem: null, // 页面下方一排标签中,选中的某一个标签
@@ -234,6 +241,8 @@
             imgViewWidth: 0,        // imageView 宽度
             tagViewWidth: 100,      // tagView 默认宽度
             tagViewHeight: 114,     // tagView 默认高
+            zIndex: 0,              // 标签高度, 新添加的标签高度递增 && 每次点击标签的时候加1
+            isShowBigTag: false,    // 触摸标签是是否变大 , (变大会让标签标识位置略有偏差)
         },
         mounted: function () {
             this.initView()
@@ -249,16 +258,11 @@
                 this.imageViewRect = rootView.getBoundingClientRect();
                 this.toolBarHeight = this.imageViewRect.top;
                 this.imgViewWidth = this.imageViewRect.right - this.imageViewRect.left;
-                console.log('imageViewRect: ');
-                console.log(this.imageViewRect);
                 // 标签回显
                 let asd = sessionStorage.getItem("imgTagData");
-                console.log(asd);
                 if (asd != null) {
                     this.imgTagData = JSON.parse(asd);
                 }
-                console.log(this.imgTagData);
-
                 if (this.imgTagData != null && this.imgTagData.length > 0) {
                     for (let i in this.imgTagData) {
                         this.addTag(this.imgTagData[i]);
@@ -326,11 +330,13 @@
                 let newElement = document.createElement('div');
                 newElement.innerHTML = this.createNewTag(item.name);
                 let element = $(newElement);
+                this.zIndex++;
                 // x, y 触摸点
                 element.css({
                     'position': 'absolute',
                     'left': item.x + 'px',
-                    'top': (item.y - this.toolBarHeight) + 'px'
+                    'top': (item.y - this.toolBarHeight) + 'px',
+                    'z-index': this.zIndex,
                 });
                 element.attr('id', item.id);
                 rootView.appendChild(newElement);
@@ -357,7 +363,6 @@
                         case "touchstart":
                             // 获取标签元素区域数据 , rect ,{x: 0, y: 90, width: 1920, height: 990, top: 90, bottom:222}
                             _this.tagViewRect = element.getBoundingClientRect();
-                            console.log(_this.tagViewRect);
                             // 触摸点
                             x = event.touches[0].clientX;
                             y = event.touches[0].clientY;
@@ -365,6 +370,25 @@
                             _this.tagDifX = x - _this.tagViewRect.left;
                             _this.tagDifY = y - _this.tagViewRect.top;
                             _this.tagViewWidth = _this.tagViewRect.right - _this.tagViewRect.left;
+                            // 每次触摸的时候, 标签高度增高(标签有重叠时,能让被点击的标签上浮)
+                            _this.zIndex++;
+                            $(element).css('z-index', _this.zIndex);
+
+                            // 触摸一个标签, 其他标签变半透明状态(0.8)
+                            let childNodes = rootView.childNodes;
+                            if (childNodes != null && childNodes.length > 1) {
+                                for (let i = 0; i < childNodes.length; i++) {
+                                    let id = childNodes[i].getAttribute("id");
+                                    if (id != null && id.indexOf('tag') != -1 && element != childNodes[i]) {
+                                        $(childNodes[i]).addClass('opacity_type');
+                                    }
+                                }
+                            }
+                            //触摸的标签变大 scale 1.2
+                            if (_this.isShowBigTag) {
+                                $(element).addClass('scale_big_type');
+                            }
+
                             break;
                         case "touchmove":
                             _this.isTagMoved = true;
@@ -376,10 +400,12 @@
                             if (x <= _this.tagDifX) {
                                 x = _this.tagDifX;
                             }
+                            // 右侧最大位置
                             let rightMax = _this.imgViewWidth - (_this.tagViewWidth - _this.tagDifX);
                             if (x > rightMax) {
                                 x = rightMax;
                             }
+                            // 顶部最小位置
                             if (y <= _this.toolBarHeight + _this.tagDifY) {
                                 y = _this.toolBarHeight + _this.tagDifY;
                             }
@@ -398,7 +424,7 @@
                             if (_this.isTagMoved) {
                                 // 停止移动时,根据标签的位置来判断是否删除标签或者更新标签的位置
                                 if (x >= _this.tagDifX && x < rightMax1 && y > _this.imageViewRect.bottom) {
-                                    // 移除元素
+                                    // 移除标签
                                     rootView.removeChild(element);
                                     // 移除数组里的对应的元素
                                     let id = $(element).attr('id');
@@ -420,9 +446,20 @@
                                             break;
                                         }
                                     }
-
                                 }
                             }
+                            // 移除其他标签透明度
+                            let childNodes1 = rootView.childNodes;
+                            if (childNodes1 != null && childNodes1.length > 0) {
+                                for (let i = 0; i < childNodes1.length; i++) {
+                                    $(childNodes1[i]).removeClass('opacity_type');
+                                }
+                            }
+                            // 移除当前标签的放大样式 (如果当前标签被删除[parentNode==null], 就不处理)
+                            if (element.parentNode != null && _this.isShowBigTag) {
+                                $(element).removeClass('scale_big_type');
+                            }
+                            //标签移动状态重置
                             _this.isTagMoved = false;
                             break;
                     }
@@ -441,7 +478,7 @@
 
 
             back: function () {
-
+                this.imgTagData = [];
             },
             finish: function () {
                 console.log('imgTagData: ' + JSON.stringify(this.imgTagData));

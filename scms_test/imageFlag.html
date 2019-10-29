@@ -226,10 +226,10 @@
             idMove: false,          //
             selectedTagItem: '',   // 当前选中的标签
             isTagTouched: false,   // 已经贴上去的标签是否被摁住
+            toolBarHeight: 90,      //  页面标题栏高度
         },
         mounted: function () {
             this.initView()
-
         },
         methods: {
             initView: function () {
@@ -297,7 +297,7 @@
                 let newElement = document.createElement('div');
                 newElement.innerHTML = this.createNewTag(item.name);
                 let element = $(newElement);
-                element.css({'position': 'absolute', 'left': item.x + 'px', 'top': (item.y - 90) + 'px'});
+                element.css({'position': 'absolute', 'left': item.x + 'px', 'top': (item.y - this.toolBarHeight) + 'px'});
                 element.attr('id', item.id);
                 rootView.appendChild(newElement);
                 this.addTagMoveEvent(newElement, rootView);
@@ -316,8 +316,6 @@
                     // 点击标签时, 阻止事件向父级传递, 防止再次生成新的标签
                     event.cancelBubble = true;
                     // event.stopPropagation();
-                    // rootView
-                    let rootElement = element.parentNode;
                     let x = 0;
                     let y = 0;
                     switch (event.type) {
@@ -327,24 +325,39 @@
                             x = event.touches[0].clientX.toFixed(1);
                             y = event.touches[0].clientY.toFixed(1);
                             // 将标签置顶
+                            let left = element.style.left;
+                            let top = element.style.top;
+
+                            let difX = x - left;
+                            let difY = y - top - _this.toolBarHeight;   // todo
+
+                            console.log('x: ' + x);
+                            console.log('left: ' + left);
+                            console.log('-------- ');
+                            console.log('y: ' + y);
+                            console.log('top: ' + top);  // + _this.toolBarHeight
 
                             break;
                         case "touchmove":
 
                             _this.isTagTouched = true;
                             _this.showDeleteView = true;
+                            // 点击位置 .
                             x = event.touches[0].clientX.toFixed(1);
                             y = event.touches[0].clientY.toFixed(1);
+                            // 布局位置
+                            let left1 = element.style.left;
+                            let top2 = element.style.top;
                             if (x <= 0) {
                                 x = 0;
                             }
                             if (x > 1820) {
                                 x = 1820;
                             }
-                            if (y <= 90) {
-                                y = 90;
+                            if (y <= _this.toolBarHeight) {
+                                y = _this.toolBarHeight;
                             }
-                            $(element).css({'position': 'absolute', 'left': (x + 'px'), 'top': (y - 90 + 'px')});
+                            $(element).css({'position': 'absolute', 'left': (x + 'px'), 'top': (y - _this.toolBarHeight + 'px')});
                             break;
                         case "touchend":
                             idMoved = false;

@@ -114,6 +114,51 @@
             height: 120px;
             background: linear-gradient(180deg, rgba(254, 37, 29, 0.14) 0%, rgba(254, 37, 29, 0.06) 100%);
         }
+
+        .float_tag {
+            width: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .float_tag_name {
+            width: 100px;
+            height: 50px;
+            background: rgba(0, 0, 0, 1);
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 1);
+            border-radius: 25px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .float_tag_name span {
+            height: 33px;
+            font-size: 24px;
+            font-family: PingFangSC-Regular, PingFang SC;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            line-height: 33px;
+        }
+
+        .middle_white_line {
+            width: 2px;
+            height: 40px;
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .tag_point {
+            width: 16px;
+            height: 16px;
+            background: rgba(0, 0, 0, 1);
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 1);
+            border-radius: 10px;
+        }
+
     </style>
 
 </head>
@@ -160,6 +205,11 @@
 
 <script>
 
+
+    // todo (1), 如果两个标签重合，后添加的会覆盖先添加的；点击2个重合标签的后一个，会改变提高点击的那个标签的z-index至最高
+    // todo (2), 按住变透明, 变小, [标签scale（1.2），其他标签透明度变为0.8]；松开标签则回到原始大小
+    // todo (3), 不论是否添加过标签的照片图片，预览图都正常显示，不显示标签，点击图片进入全屏预览才可查看和再次编辑标签
+    // todo (4)  点击完成, 上传照片
     let v2 = new Vue({
         el: '#wrapper',
         data: {
@@ -328,8 +378,13 @@
             },
 
             createNewTag: function (name) {
-                return `<div style="background: #ceffc2">
-                            <span style="font-size: 32px">${name} </span>
+                return `<div class="float_tag">
+                            <div class="float_tag_name">
+                                <span> ${name}</span>
+                            </div>
+                            <div class="middle_white_line"> </div>
+                            <div class="tag_point"> </div>
+
                         </div>`;
             },
 
